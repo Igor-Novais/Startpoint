@@ -1,67 +1,46 @@
-<!DOCTYPE html>
+<!DOCType html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <title>Startpoint | Início</title>
-    <meta name="description" content="Acompanhe sua trilha de cursos e oportunidades na Startpoint.">
-    <link rel="stylesheet" href="login-1.css">
-</head>
-<body>
-    <header>
-        <a href="inicio.html">startpoint</a>
-        <button type="button">Notificações</button>
-        <button type="button">Perfil</button>
-    </header>
+	<head>
+		<meta charset="UTF-8">
+		<title>Starpoint | Entrar</title>
+		<meta name="description" content="Plataforma com cursos gratuitos e vagas para quem está começando sua trajetória profissional.">
+        <link rel="stylesheet" href="login-1.css">
+    </head>
+	<body>
 
-         <nav>
-            <ul>
-                <li> <a href="inicio.html">Início</a> </li>
-                <li> <a href="trilha.html">Trilha</a> </li>
-                <li> <a href="curso.html">Cursos</a> </li>
-                <li> <a href="vagas.html">Vagas</a> </li>
-                <li> <a href="perfil.html">Perfil</a> </li>
-                <li> <button type="button">Alterar tema</button> </li>
-            </ul>
-        </nav>
+		<header>
+			<a href="/starpoint.html">starpoint</a> 
+			<button type="button">Alterar tema</button>
+		</header>
 
-        <main>
-            <section>
-                <p>QUARTA-FEIRA, 12 DE JUNHO</p>
+            <main>    
+                <p>SEU PRIMEIRO PASSO</p>
+                <h1>Seu futuro começa com uma trilha.</h1>
 
-                <h1>Olá, Ana. Vamos avançar?</h1>
+                <p>Cursos gratuitos e vagas de aprendiz que combinam com você.</p>
+                
+                <form action="/login" method="post">
 
-                <p>Um passo de cada vez até sua primeira oportunidade.</p>
-            </section>
-            <section>
-                <p>MINHA TRILHA</p>
+                    <div>
+                        <label for="email">E-mail</label>
+                        <input type="email" name="email" id="email" required>
+                    </div>
 
-                    <h2>Você já começou bem</h2>
+                    <div>
+                        <label for="password">Senha</label>
+                        <input type="password" name="senha" id="password" required>
+                    </div>
 
-                    <p>33%</p>
-                    <p>1 de 3 cursos concluídos</p>
-                    <p>91% de aderência às vagas</p>
+                    <a href="/esqueci_senha.html">Esqueci minha senha</a>    
 
-                    <a href="trilha.html">Ver trilha completa →</a>
+                    <button type="submit">Entrar</button>
+                
+		        </form> 
 
-            </section>
-            <section>
-                <p>PRÓXIMA AÇÃO</p>
+                <a href="/criar_conta.html">Criar conta</a>    
 
-                <h2>Controle de estoque</h2>
+                <p>Gratuito, sem anúncios e feito para quem está começando.</p>
 
-                <p>SENAC · 16h · Presencial</p>
-
-                <a href="trilha.html">Continuar curso →</a>
-            </section>
-            <section>
-                <p>PREPARE-SE</p>
-
-                <h2>Antes de se candidatar</h2>
-
-                <p>Checklist de contratação — 2 de 5 documentos separados</p>
-
-            </section>
-
-        </main>
-</body>
+		    </main>
+	</body>
 </html>
