@@ -63,3 +63,7 @@ header p {
     border-radius: inherit;
     background: var(--orange);
 }
+
+.progress-fill--two {
+    width: 50%;
+}
