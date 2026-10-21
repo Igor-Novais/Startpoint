@@ -23,13 +23,13 @@ body {
 }
 
 header,
+header,
 .progress,
 main {
     width: 100%;
-    max-width: 500px;
+    max-width: 768px;
     margin-right: auto;
     margin-left: auto;
-    padding-top: 28px;
 }
 header {
     display: flex;
@@ -84,6 +84,11 @@ header p {
     color: var(--orange);
     font-size: 12px;
     font-weight: 700;
+}
+
+main {
+    max-width: 500px;
+    padding-top: 28px;
 }
 
 h1 {
