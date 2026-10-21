@@ -57,10 +57,14 @@ header p {
     background: var(--line);
 }
 
-.progress-fill--um {
+.progress-fill {
     height: 100%;
     border-radius: inherit;
     background: var(--orange);
+}
+
+.progress-fill--um {
+    width: 25%;
 }
 
 .progress-fill--dois {
