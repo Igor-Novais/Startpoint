@@ -15,41 +15,69 @@
     </header>
 
     <div class="progress">
-         <div class="progress-fill--tres"></div>
+         <div class="progress-fill progress-fill--tres"></div>
     </div>
     
     <main>
-        <p>03</p>
+        <p class="eyebrow">03</p>
 
         <h1>Onde você está?</h1>
         <p>Vamos priorizar cursos e vagas perto de você.</p>
 
-        <form action="#" method="post">
-            <div>
-                <!-- Barra de busca -->
-                <label for="regiao">Cidade ou região</label>
-                <input
-                    type="text"
-                    id="regiao"
-                    name="regiao"
-                    list="regioes"
-                    placeholder="Digite sua cidade"
-                    required
-                >
+       
+                    <fieldset class="city-list">
+                        <legend>Escolha sua cidade</legend>
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="São Paulo/SP" required>
+                                <span>São Paulo/SP</span>
+                            </label>
 
-                <datalist id="regioes">
-                    <option value="São Paulo/SP"></option>
-                    <option value="Campinas/SP"></option>
-                    <option value="Osasco/SP"></option>
-                    <option value="Guarulhos/SP"></option>
-                    <option value="Santo André/SP"></option>
-                    <option value="São Bernardo do Campo/SP"></option>
-                    <option value="Diadema/SP"></option>
-                    <option value="Barueri/SP"></option>
-                    <option value="Mogi das Cruzes/SP"></option>
-                    <option value="Sorocaba/SP"></option>
-                </datalist>
-            </div>
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Campinas/SP">
+                                <span>Campinas/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Osasco/SP">
+                                <span>Osasco/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Guarulhos/SP">
+                                <span>Guarulhos/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Santo André/SP">
+                                <span>Santo André/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="São Bernardo do Campo/SP">
+                                <span>São Bernardo do Campo/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Diadema/SP">
+                                <span>Diadema/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Barueri/SP">
+                                <span>Barueri/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Mogi das Cruzes/SP">
+                                <span>Mogi das Cruzes/SP</span>
+                            </label>
+
+                            <label class="city-option">
+                                <input type="radio" name="cidade" value="Sorocaba/SP">
+                                <span>Sorocaba/SP</span>
+                            </label>
+
+                    </fieldset> 
 
             <a href="diagnostico-2.html">Voltar</a>
             <a href="diagnostico-4.html">Continuar →</a>
