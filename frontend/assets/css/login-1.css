@@ -182,3 +182,13 @@ main > p:last-child::before {
         font-size: 27px;
     }
 }
+
+nav a {
+    background-color: transparent;
+    color: #222;
+}
+
+nav a[aria-current="page"] {
+    background-color: #fff0e6;
+    color: #ff6500;
+}
