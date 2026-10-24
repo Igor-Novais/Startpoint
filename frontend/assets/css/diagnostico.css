@@ -179,3 +179,104 @@ form > a:last-of-type:hover {
         font-size: 25px;
     }
 }
+
+
+main.diagnostico-cidades {   /*diagnostico 3*/
+    width: 100%;
+    max-width: 750px;
+    padding-top: clamp(24px, 4vw, 36px);
+}
+
+.diagnostico-cidades .eyebrow {
+    font-size: clamp(14px, 2vw, 16px);
+}
+
+.diagnostico-cidades h1 {
+    font-size: clamp(28px, 4vw, 36px);
+}
+
+.diagnostico-cidades h1 + p {
+    margin-bottom: clamp(20px, 3vw, 28px);
+    font-size: clamp(16px, 2.5vw, 20px);
+}
+
+.diagnostico-cidades .city-list {
+    width: 100%;
+    min-width: 0;
+    max-height: min(42vh, 340px);
+    margin: 0 0 24px;
+    padding: 0 8px 0 0;
+    overflow-y: auto;
+    border: 0;
+}
+
+.diagnostico-cidades .city-list legend {
+    margin-bottom: 12px;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.diagnostico-cidades .city-option {
+    display: flex;
+    align-items: center;
+    gap: clamp(10px, 2vw, 14px);
+    width: 100%;
+    min-height: clamp(56px, 8vh, 72px);
+    margin-bottom: 10px;
+    padding: clamp(12px, 2vw, 20px);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: var(--surface);
+    cursor: pointer;
+}
+
+.diagnostico-cidades .city-option:has(input:checked) {
+    border-color: var(--orange);
+    background: var(--orange-soft);
+}
+
+.diagnostico-cidades .city-option input[type="radio"] {
+    flex: 0 0 20px;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: var(--orange);
+    cursor: pointer;
+}
+
+.diagnostico-cidades .city-option span {
+    font-size: clamp(16px, 2.5vw, 20px);
+    font-weight: 700;
+}
+
+.diagnostico-cidades .city-actions {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.diagnostico-cidades .city-actions a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: clamp(112px, 17vw, 130px);
+    min-height: clamp(48px, 7vh, 58px);
+    padding: clamp(10px, 2vw, 14px) clamp(16px, 3vw, 24px);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    font-size: clamp(14px, 2vw, 16px);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.diagnostico-cidades .city-actions a:first-child {
+    color: var(--text);
+    background: var(--surface);
+}
+
+.diagnostico-cidades .city-actions a:last-child {
+    border-color: var(--orange);
+    color: white;
+    background: var(--orange);
+}
