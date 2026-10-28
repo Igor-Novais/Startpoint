@@ -2,117 +2,65 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Encontre vagas e oportunidades profissionais para começar sua carreira.">
-    <title>StartPoint | Vagas</title>
+    <title>Startpoint | Vagas</title>
+    <link rel="stylesheet" href="assets/css/painel.css">
+    <link rel="stylesheet" href="assets/css/vagas.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
 </head>
 
 <body>
-    <aside>
-        <a href="inicio.html">starpoint</a>
+    <header>
+        <a href="inicio.html">startpoint</a>
+        <button type="button" id="btn-tema">Alterar tema</button>
+        <button type="button">Notificações</button>
+        <button type="button" data-ir="perfil.html">Perfil</button>
+    </header>
 
-        <nav>
-            <ul>
-                <li><a href="inicio.html">Início</a></li>
-                <li><a href="trilha.html">Trilha</a></li>
-                <li><a href="curso.html">Cursos</a></li>
-                <li><a href="vagas.html" aria-current="page">Vagas</a></li>
-                <li><a href="perfil.html">Perfil</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <ul>
+            <li><a href="inicio.html">Início</a></li>
+            <li><a href="trilha.html">Trilha</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="vagas.html" aria-current="page">Vagas</a></li>
+            <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+    </nav>
 
-        <button type="button">Alterar tema</button>
-    </aside>
+    <main>
+        <p>VAGAS PARA VOCÊ</p>
+        <h1>Sua primeira oportunidade</h1>
+        <p>Veja o quanto seu perfil combina e o que falta aprender.</p>
 
-    <div>
-        <header>
-            <button type="button" aria-label="Abrir menu">Menu</button>
-            <button type="button">Notificações</button>
-            <button type="button">Perfil</button>
-        </header>
-
-        <main>
-            <p>VAGAS PARA VOCÊ</p>
-            <h1>Sua primeira oportunidade</h1>
-            <p>Veja o quanto seu perfil combina e o que falta aprender.</p>
-
-            <form>
-                <label for="busca">Buscar empresa ou vaga</label>
-                <input
-                    type="search"
-                    id="busca"
-                    name="busca"
-                    placeholder="Buscar empresa ou vaga"
-                >
-                <button type="submit">Buscar</button>
-            </form>
-
-            <section>
-                <h2>Filtros</h2>
-
+        <form id="form-filtros">
+            <div>
                 <label for="localizacao">Localização</label>
                 <select id="localizacao" name="localizacao">
                     <option value="">Todas as localidades</option>
-                    <option value="guarulhos">Guarulhos/SP</option>
-                    <option value="santo-andre">Santo André/SP</option>
-                    <option value="campinas">Campinas/SP</option>
-                    <option value="sao-paulo">São Paulo/SP</option>
-                    <option value="remoto">Remoto</option>
                 </select>
+            </div>
 
+            <div>
                 <label for="area">Área profissional</label>
                 <select id="area" name="area">
                     <option value="">Todas as áreas</option>
-                    <option value="logistica">Logística</option>
-                    <option value="tecnologia">Tecnologia</option>
-                    <option value="administrativo">Administrativo</option>
-                    <option value="saude">Saúde</option>
                 </select>
-            </section>
+            </div>
+        </form>
 
-            <section>
-                <h2>Vagas encontradas</h2>
+        <section>
+            <h2>Vagas encontradas</h2>
 
-                <article>
-                    <p>Mercado Livre</p>
-                    <h3>Aprendiz de Expedição</h3>
-                    <p>83% de aderência</p>
+            <p id="mensagem" class="mensagem"></p>
 
-                    <ul>
-                        <li>Localização: Guarulhos/SP</li>
-                        <li>Modalidade: Remoto</li>
-                        <li>Salário: R$ 714/mês</li>
-                    </ul>
+            <div id="lista-vagas"></div>
+        </section>
+    </main>
 
-                    <h4>O que falta</h4>
-                    <ul>
-                        <li>Segurança na movimentação de materiais</li>
-                        <li>Controle de estoque</li>
-                    </ul>
-
-                    <button type="button">Quero me candidatar</button>
-                </article>
-
-                <article>
-                    <p>Rota Brasil</p>
-                    <h3>Aprendiz de Estoque</h3>
-                    <p>68% de aderência</p>
-
-                    <ul>
-                        <li>Localização: Guarulhos/SP</li>
-                        <li>Modalidade: Híbrido</li>
-                        <li>Salário: R$ 1.442/mês</li>
-                    </ul>
-
-                    <h4>O que falta</h4>
-                    <ul>
-                        <li>Controle de estoque</li>
-                        <li>Segurança na movimentação de materiais</li>
-                    </ul>
-
-                    <button type="button">Quero me candidatar</button>
-                </article>
-            </section>
-        </main>
-    </div>
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/modelos.js"></script>
+    <script src="assets/js/vagas.js"></script>
 </body>
 </html>

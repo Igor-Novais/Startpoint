@@ -3,13 +3,14 @@
         <head>
             <meta charset="UTF-8">
             <title>Startpoint | Diagnóstico</title>
-            <meta name="description" content="Diagnóstico inicial para identificar seus interesses e 
+            <meta name="description" content="Diagnóstico inicial para identificar seus interesses e
             criar uma trilha personalizada de cursos e oportunidades.">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="diagnostico.css">
+            <link rel="stylesheet" href="assets/css/diagnostico.css">
+            <link rel="stylesheet" href="assets/css/comum.css">
         </head>
 
-        <body>
+        <body data-etapa="1">
 
             <header>
                 <a href="login.html">startpoint</a>
@@ -17,24 +18,24 @@
             </header>
 
                 <div class="progress">
-                    <div class="progress-fill--um"></div>
+                    <div class="progress-fill progress-fill--um"></div>
                 </div>
-                
+
                 <main>
 
-                    <p>01</p>
+                    <p class="eyebrow">01</p>
 
                     <h1>Como estão seus estudos?</h1>
                     <p>Isso ajuda a encontrar oportunidades para sua fase.</p>
 
-                    <form action="#" method="post">
+                    <form>
 
                         <div>
                             <label for="fund_curs">Ensino fundamental cursando</label>
                             <input type="radio"
                                    name="quest"
                                    id="fund_curs"
-                                   value="fundamental_cursando"
+                                   value="Ensino fundamental cursando"
                                    required
                                    >
                         </div>
@@ -44,7 +45,7 @@
                             <input type="radio"
                                    name="quest"
                                    id="fund_conc"
-                                   value="fundamental_concluido"
+                                   value="Ensino fundamental concluído"
                                    >
                         </div>
 
@@ -53,7 +54,7 @@
                             <input type="radio"
                                    name="quest"
                                    id="ens_medio"
-                                   value="medio_cursando"
+                                   value="Ensino médio cursando"
                                    >
                         </div>
 
@@ -62,17 +63,21 @@
                             <input type="radio"
                                    name="quest"
                                    id="medio_conc"
-                                   value="medio_concluido"
-                                    required
+                                   value="Ensino médio concluído"
                                    >
                         </div>
 
-                        <a href="login.html">Voltar</a>
-                        <a href="diagnostico-2.html">Continuar →</a>
-                        
+                        <p id="mensagem" class="mensagem"></p>
+
+                        <a href="login.html" id="btn-voltar">Voltar</a>
+                        <a href="diagnostico-2.html" id="btn-continuar">Continuar →</a>
+
                     </form>
                 </main>
 
+            <script src="assets/js/api.js"></script>
+            <script src="assets/js/comum.js"></script>
+            <script src="assets/js/diagnostico.js"></script>
         </body>
 
 

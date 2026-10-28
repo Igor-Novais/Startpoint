@@ -73,6 +73,15 @@ nav {
     background: var(--branco);
 }
 
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
 nav a,
 nav button {
     display: block;
@@ -161,7 +170,7 @@ main > section:nth-of-type(2) > p:nth-of-type(3) {
     color: var(--texto-suave);
     font-size: 14px;
     background:
-        linear-gradient(to right, var(--laranja) 33%, var(--borda) 33%)
+        linear-gradient(to right, var(--laranja) var(--progresso, 0%), var(--borda) var(--progresso, 0%))
         left top / 100% 6px no-repeat;
 }
 
@@ -243,6 +252,11 @@ main > section:nth-of-type(4) {
 
     main {
         padding: 24px 18px;
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: 6px;
     }
 
     main > section:nth-of-type(3) {

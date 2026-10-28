@@ -251,7 +251,8 @@ main > ul > li::before {
     font-weight: 700;
 }
 
-main > ul > li:first-child::before {
+/* curso concluído */
+main > ul > li.concluido::before {
     content: "✓";
     background: var(--verde);
     border-color: var(--verde);
@@ -347,6 +348,68 @@ article a:hover {
     color: var(--laranja-escuro);
 }
 
+main > ul > li.concluido article {
+    opacity: 0.8;
+}
+
+/* botões do card */
+.acoes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.acoes a {
+    margin-top: 0;
+}
+
+.acoes button {
+    padding: 12px 22px;
+    border: 1px solid var(--laranja);
+    border-radius: 14px;
+    background: var(--laranja);
+    color: #fff;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.acoes button:hover {
+    background: var(--laranja-escuro);
+}
+
+li.concluido .btn-concluir {
+    border-color: var(--borda);
+    background: var(--branco);
+    color: var(--texto);
+}
+
+.acoes .btn-remover {
+    margin-left: auto;
+    padding: 8px 10px;
+    border: 0;
+    background: transparent;
+    color: var(--texto-suave);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.acoes .btn-remover:hover {
+    background: transparent;
+    color: #c2410c;
+    text-decoration: underline;
+}
+
+.link-adicionar {
+    display: inline-block;
+    margin: 28px 0 0 70px;
+    color: var(--laranja-escuro);
+    font-weight: 700;
+    text-decoration: none;
+}
+
 @media (max-width: 760px) {
     body {
         display: flex;
@@ -427,6 +490,10 @@ article a:hover {
 
     article {
         padding: 20px;
+    }
+
+    .link-adicionar {
+        margin-left: 0;
     }
 }
 

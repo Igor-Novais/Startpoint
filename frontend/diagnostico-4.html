@@ -5,33 +5,34 @@
     <title>Startpoint | Diagnóstico — Etapa 4</title>
     <meta name="description" content="Escolha uma área de interesse para personalizar sua trilha na Startpoint.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="diagnostico.css">
+    <link rel="stylesheet" href="assets/css/diagnostico.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
 </head>
 
-<body>
+<body data-etapa="4">
     <header>
         <a href="login.html">startpoint</a>
         <p>Etapa 4 de 4</p>
     </header>
 
     <div class="progress">
-        <div class="progress-fill--quatro"></div>
+        <div class="progress-fill progress-fill--quatro"></div>
     </div>
 
     <main>
-        <p>04</p>
+        <p class="eyebrow">04</p>
 
         <h1>Qual área combina com você?</h1>
         <p>Você poderá mudar esta escolha depois.</p>
 
-        <form action="#" method="post">
+        <form>
             <div>
                 <label for="administrativo">Administrativo</label>
                 <input
                     type="radio"
                     name="area"
                     id="administrativo"
-                    value="administrativo"
+                    value="Administrativo"
                     required
                 >
             </div>
@@ -42,7 +43,7 @@
                     type="radio"
                     name="area"
                     id="tecnologia"
-                    value="tecnologia"
+                    value="Tecnologia"
                 >
             </div>
 
@@ -52,7 +53,7 @@
                     type="radio"
                     name="area"
                     id="varejo"
-                    value="varejo"
+                    value="Varejo"
                 >
             </div>
 
@@ -62,7 +63,7 @@
                     type="radio"
                     name="area"
                     id="logistica"
-                    value="logistica"
+                    value="Logística"
                 >
             </div>
 
@@ -72,7 +73,7 @@
                     type="radio"
                     name="area"
                     id="atendimento-cliente"
-                    value="atendimento_cliente"
+                    value="Atendimento ao Cliente"
                 >
             </div>
 
@@ -82,7 +83,7 @@
                     type="radio"
                     name="area"
                     id="servicos-financeiros"
-                    value="servicos_financeiros"
+                    value="Serviços Financeiros"
                 >
             </div>
 
@@ -92,7 +93,7 @@
                     type="radio"
                     name="area"
                     id="saude"
-                    value="saude"
+                    value="Saúde"
                 >
             </div>
 
@@ -102,13 +103,19 @@
                     type="radio"
                     name="area"
                     id="industria"
-                    value="industria"
+                    value="Indústria"
                 >
             </div>
 
-            <a href="diagnostico-3.html">Voltar</a>
-            <a href="inicio.html">Gerar minha trilha →</a>
+            <p id="mensagem" class="mensagem"></p>
+
+            <a href="diagnostico-3.html" id="btn-voltar">Voltar</a>
+            <a href="inicio.html" id="btn-continuar">Gerar minha trilha →</a>
         </form>
     </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/diagnostico.js"></script>
 </body>
 </html>

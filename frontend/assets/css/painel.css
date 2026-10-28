@@ -1,0 +1,211 @@
+/* Layout das telas Vagas e Perfil */
+
+:root {
+    --fundo: #f5f5f2;
+    --branco: #ffffff;
+    --texto: #151515;
+    --texto-suave: #73736f;
+    --borda: #deded8;
+    --laranja: #ff6b0b;
+    --laranja-escuro: #dc5d08;
+    --laranja-claro: #fff0e5;
+    --verde: #167a4a;
+    --verde-claro: #e5f5ec;
+    --chip: #f0f0ed;
+    --sombra: 0 12px 40px rgba(21, 21, 21, 0.06);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-rows: 76px minmax(0, 1fr);
+    min-height: 100vh;
+    margin: 0;
+    background: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5;
+}
+
+header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 28px 0 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+header > a {
+    display: flex;
+    align-items: center;
+    width: 240px;
+    height: 100%;
+    padding: 0 24px;
+    background: var(--branco);
+    border-right: 1px solid var(--borda);
+    color: var(--laranja);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-decoration: none;
+}
+
+header > button {
+    min-height: 44px;
+    padding: 10px 16px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    background: var(--branco);
+    color: var(--texto);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+header > button:first-of-type {
+    margin-left: auto;
+}
+
+header > button:last-of-type {
+    background: var(--texto);
+    border-color: var(--texto);
+    color: var(--branco);
+}
+
+nav {
+    grid-column: 1;
+    grid-row: 2;
+    padding: 24px 14px;
+    border-right: 1px solid var(--borda);
+    background: var(--branco);
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav a {
+    display: block;
+    min-height: 44px;
+    padding: 10px 16px;
+    border-radius: 12px;
+    color: var(--texto-suave);
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+nav a:hover {
+    background: var(--fundo);
+}
+
+nav a[aria-current="page"] {
+    background: var(--laranja-claro);
+    color: var(--laranja);
+}
+
+main {
+    grid-column: 2;
+    grid-row: 2;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 48px);
+}
+
+main > p:first-child {
+    margin: 0 0 8px;
+    color: var(--laranja-escuro);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+main > h1 {
+    margin: 0 0 8px;
+    font-size: clamp(30px, 4vw, 40px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+}
+
+main > h1 + p {
+    margin: 0 0 28px;
+    color: var(--texto-suave);
+    font-size: 18px;
+}
+
+@media (max-width: 760px) {
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        min-height: 68px;
+        padding: 12px 18px;
+    }
+
+    header > a {
+        width: auto;
+        height: auto;
+        padding: 0;
+        background: transparent;
+        border-right: 0;
+        font-size: 24px;
+    }
+
+    header > button {
+        min-height: 40px;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    nav {
+        padding: 10px 12px;
+        overflow-x: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--borda);
+    }
+
+    nav ul {
+        flex-direction: row;
+        gap: 6px;
+    }
+
+    nav a {
+        white-space: nowrap;
+    }
+
+    main {
+        padding: 24px 18px 40px;
+    }
+}
+
+@media (max-width: 420px) {
+    header {
+        gap: 8px;
+        padding: 10px 12px;
+    }
+
+    header > a {
+        font-size: 20px;
+    }
+
+    header > button {
+        padding: 8px 10px;
+        font-size: 12px;
+    }
+}

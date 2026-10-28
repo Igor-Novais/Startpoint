@@ -230,6 +230,53 @@ main > form {
     display: none;
 }
 
+main > .mensagem {
+    grid-column: 1 / -1;
+}
+
+/* lista de cursos */
+#lista-cursos {
+    display: contents;
+}
+
+.course-na-trilha {
+    color: #3d7253;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.course-card-bottom {
+    flex-wrap: wrap;
+}
+
+.course-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.course-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 38px;
+    padding: 8px 12px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.course-link:hover {
+    border-color: var(--orange);
+    color: var(--orange-dark);
+}
+
+.details-button:disabled {
+    opacity: 0.6;
+    cursor: wait;
+}
+
 button:focus-visible,
 a:focus-visible {
     outline: 3px solid #f9ad73;

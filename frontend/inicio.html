@@ -5,13 +5,15 @@
     <title>Startpoint | Início</title>
     <meta name="description" content="Acompanhe sua trilha de cursos e oportunidades na Startpoint.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="inicio.css">
+    <link rel="stylesheet" href="assets/css/inicio.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
 </head>
 <body>
     <header>
         <a href="inicio.html">startpoint</a>
+        <button type="button" id="btn-tema">Alterar tema</button>
         <button type="button">Notificações</button>
-        <button type="button">Perfil</button>
+        <button type="button" data-ir="perfil.html">Perfil</button>
     </header>
 
        <nav>
@@ -23,23 +25,23 @@
                 <li><a href="perfil.html">Perfil</a></li>
             </ul>
         </nav>
-        
+
         <main>
             <section>
-                <p>QUARTA-FEIRA, 12 DE JUNHO</p>
+                <p id="data-hoje"></p>
 
-                <h1>Olá, Ana. Vamos avançar?</h1>
+                <h1 id="saudacao">Olá! Vamos avançar?</h1>
 
                 <p>Um passo de cada vez até sua primeira oportunidade.</p>
             </section>
-            <section>
+            <section id="resumo-trilha">
                 <p>MINHA TRILHA</p>
 
-                    <h2>Você já começou bem</h2>
+                    <h2 id="titulo-trilha">Carregando sua trilha...</h2>
 
-                    <p>33%</p>
-                    <p>1 de 3 cursos concluídos</p>
-                    <p>91% de aderência às vagas</p>
+                    <p id="percentual">0%</p>
+                    <p id="cursos-concluidos">0 de 0 cursos concluídos</p>
+                    <p id="aderencia">0% de aderência às vagas</p>
 
                     <a href="trilha.html">Ver trilha completa →</a>
 
@@ -47,11 +49,11 @@
             <section>
                 <p>PRÓXIMA AÇÃO</p>
 
-                <h2>Controle de estoque</h2>
+                <h2 id="proximo-nome">-</h2>
 
-                <p>SENAC · 16h · Presencial</p>
+                <p id="proximo-info"></p>
 
-                <a href="trilha.html">Continuar curso →</a>
+                <a href="trilha.html" id="proximo-link">Continuar curso →</a>
             </section>
             <section>
                 <p>PREPARE-SE</p>
@@ -63,5 +65,9 @@
             </section>
 
         </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/inicio.js"></script>
 </body>
 </html>

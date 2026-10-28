@@ -5,13 +5,14 @@
     <title>Startpoint | Recuperar senha</title>
     <meta name="description" content="Recupere o acesso à sua conta Startpoint.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="esqueci_senha.css">
+    <link rel="stylesheet" href="assets/css/esqueci_senha.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
 </head>
 
 <body>
     <header>
         <a href="login.html">startpoint</a>
-        <button type="button" aria-label="Alterar tema">☾</button>
+        <button type="button" id="btn-tema" aria-label="Alterar tema">☾</button>
     </header>
 
     <main>
@@ -24,7 +25,7 @@
                 de recuperação de senha.
             </p>
 
-            <form action="#" method="post">
+            <form id="form-senha">
                 <div>
                     <label for="email">E-mail</label>
                     <input
@@ -37,11 +38,17 @@
                     >
                 </div>
 
+                <p id="mensagem" class="mensagem"></p>
+
                 <button type="submit">Enviar →</button>
             </form>
 
             <a href="login.html">Voltar para o login</a>
         </section>
     </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/esqueci-senha.js"></script>
 </body>
 </html>

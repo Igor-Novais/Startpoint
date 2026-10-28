@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Startpoint | Diagnóstico — Etapa 3</title>
-    <meta name="description" content="Escolha sua cidade ou região para encontrar cursos e vagas perto de você.">
+    <meta name="description" content="Escolha sua cidade para encontrar cursos e vagas perto de você.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="diagnostico.css">
+    <link rel="stylesheet" href="assets/css/diagnostico.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
 </head>
 
-<body>
+<body data-etapa="3">
     <header>
         <a href="login.html">startpoint</a>
         <p>Etapa 3 de 4</p>
@@ -18,70 +19,31 @@
          <div class="progress-fill progress-fill--tres"></div>
     </div>
     
-    <main>
+    <main class="diagnostico-cidades">
         <p class="eyebrow">03</p>
 
         <h1>Onde você está?</h1>
-        <p>Vamos priorizar cursos e vagas perto de você.</p>
+        <p>Por enquanto o Startpoint atende a cidade de São Paulo.</p>
 
        
-                    <fieldset class="city-list">
-                        <legend>Escolha sua cidade</legend>
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="São Paulo/SP" required>
-                                <span>São Paulo/SP</span>
-                            </label>
+        <fieldset class="city-list">
+            <legend>Escolha sua cidade</legend>
+            <label class="city-option">
+                <input type="radio" name="cidade" value="São Paulo/SP" checked>
+                <span>São Paulo/SP</span>
+            </label>
+        </fieldset> 
 
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Campinas/SP">
-                                <span>Campinas/SP</span>
-                            </label>
+        <p id="mensagem" class="mensagem"></p>
 
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Osasco/SP">
-                                <span>Osasco/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Guarulhos/SP">
-                                <span>Guarulhos/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Santo André/SP">
-                                <span>Santo André/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="São Bernardo do Campo/SP">
-                                <span>São Bernardo do Campo/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Diadema/SP">
-                                <span>Diadema/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Barueri/SP">
-                                <span>Barueri/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Mogi das Cruzes/SP">
-                                <span>Mogi das Cruzes/SP</span>
-                            </label>
-
-                            <label class="city-option">
-                                <input type="radio" name="cidade" value="Sorocaba/SP">
-                                <span>Sorocaba/SP</span>
-                            </label>
-
-                    </fieldset> 
-
-            <a href="diagnostico-2.html">Voltar</a>
-            <a href="diagnostico-4.html">Continuar →</a>
-        </form>
+        <div class="city-actions">
+            <a href="diagnostico-2.html" id="btn-voltar">Voltar</a>
+            <a href="diagnostico-4.html" id="btn-continuar">Continuar →</a>
+        </div>
     </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/diagnostico.js"></script>
 </body>
 </html>
