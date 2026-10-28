@@ -40,8 +40,9 @@ function mostrarResumo(trilha) {
     document.getElementById('aderencia').textContent =
         `${trilha.aderenciaMedia}% de aderência às vagas`;
 
-    // barra de progresso
-    document.getElementById('cursos-concluidos').style.setProperty('--progresso', trilha.percentual + '%');
+    // barra de progresso (é o fundo do parágrafo)
+    const barra = document.getElementById('cursos-concluidos');
+    barra.style.backgroundImage = `linear-gradient(to right, var(--laranja) ${trilha.percentual}%, var(--borda) ${trilha.percentual}%)`;
 }
 
 function mostrarProximo(trilha) {

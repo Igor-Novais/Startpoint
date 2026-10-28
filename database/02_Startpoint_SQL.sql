@@ -1,5 +1,5 @@
 -- Criação do banco Startpoint
--- Depois deste arquivo, rodar o dados_exemplo.sql
+-- Depois deste arquivo, rodar o 03_dados_exemplo.sql
 
 -- Excluir base de dados - CUIDADO
 DROP DATABASE IF EXISTS startpoint_db;

@@ -31,7 +31,7 @@ database/
 frontend/
   *.html           telas
   assets/css/      estilos de cada tela
-  assets/js/       scripts (api.js, modelos.js e um arquivo por tela)
+  assets/js/       scripts (api.js, comum.js, modelos.js e um arquivo por tela)
 documentos/        entregas do projeto
 ```
 

@@ -47,14 +47,14 @@ class Trilha {
             let cursos = [];
             if (idsFaltam.length > 0) {
                 const [linhas] = await conexao.query(
-                    `SELECT c.id, GROUP_CONCAT(cc.competencia_id) AS competencias
+                    `SELECT c.id
                      FROM curso c
                      INNER JOIN curso_competencia cc ON cc.curso_id = c.id
                      WHERE c.status = 'ativo'
                        AND cc.competencia_id IN (?)
                        AND c.id NOT IN (SELECT curso_id FROM progresso WHERE trilha_id = ?)
                      GROUP BY c.id, c.area, c.duracao
-                     ORDER BY c.area = ? DESC, COUNT(*) DESC, c.duracao`,
+                     ORDER BY CASE WHEN c.area = ? THEN 0 ELSE 1 END, COUNT(*) DESC, c.duracao`,
                     [idsFaltam, trilhaId, area]
                 );
                 cursos = linhas;
@@ -64,15 +64,18 @@ class Trilha {
             const escolhidos = [];
             const cobertas = [];
 
-            cursos.forEach(curso => {
-                const ensina = curso.competencias.split(',').map(Number);
-                const novas = ensina.filter(id => !cobertas.includes(id));
+            for (const curso of cursos) {
+                const [ensina] = await conexao.query(
+                    'SELECT competencia_id FROM curso_competencia WHERE curso_id = ? AND competencia_id IN (?)',
+                    [curso.id, idsFaltam]
+                );
+                const novas = ensina.filter(e => !cobertas.includes(e.competencia_id));
 
                 if (novas.length > 0) {
                     escolhidos.push(curso.id);
-                    novas.forEach(id => cobertas.push(id));
+                    novas.forEach(e => cobertas.push(e.competencia_id));
                 }
-            });
+            }
 
             // [6] se a área ainda não tem vagas, usa os cursos da área
             const [vagasDaArea] = await conexao.query(
@@ -133,21 +136,31 @@ class Trilha {
         return linhas;
     }
 
+    // Confere se o curso da trilha (progresso) é desse usuário
+    static async ehDoUsuario(usuarioId, progressoId) {
+        const [linhas] = await db.query(
+            `SELECT p.id FROM progresso p
+             INNER JOIN trilha t ON t.id = p.trilha_id
+             WHERE p.id = ? AND t.usuario_id = ?`,
+            [progressoId, usuarioId]
+        );
+        return linhas.length > 0;
+    }
+
     // Marca ou desmarca um curso como concluído
     static async marcarConcluido(usuarioId, progressoId, concluido) {
-        const [resultado] = await db.query(
-            `UPDATE progresso p
-             INNER JOIN trilha t ON t.id = p.trilha_id
-             SET p.concluido = ?
-             WHERE p.id = ? AND t.usuario_id = ?`,
-            [concluido, progressoId, usuarioId]
-        );
-        return resultado.affectedRows > 0;
+        const ehDele = await Trilha.ehDoUsuario(usuarioId, progressoId);
+        if (!ehDele) {
+            return false;
+        }
+
+        await db.query('UPDATE progresso SET concluido = ? WHERE id = ?', [concluido, progressoId]);
+        return true;
     }
 
     // Adiciona um curso no fim da trilha (false se já estiver nela)
     static async adicionarCurso(usuarioId, cursoId) {
-        let [trilhas] = await db.query('SELECT id FROM trilha WHERE usuario_id = ?', [usuarioId]);
+        const [trilhas] = await db.query('SELECT id FROM trilha WHERE usuario_id = ?', [usuarioId]);
         let trilhaId;
 
         if (trilhas.length > 0) {
@@ -165,22 +178,27 @@ class Trilha {
             return false;
         }
 
+        // entra depois do último curso da trilha
+        const [ultima] = await db.query(
+            'SELECT IFNULL(MAX(ordem_sugerida), 0) AS ordem FROM progresso WHERE trilha_id = ?',
+            [trilhaId]
+        );
+
         await db.query(
-            `INSERT INTO progresso (trilha_id, curso_id, ordem_sugerida)
-             SELECT ?, ?, IFNULL(MAX(ordem_sugerida), 0) + 1 FROM progresso WHERE trilha_id = ?`,
-            [trilhaId, cursoId, trilhaId]
+            'INSERT INTO progresso (trilha_id, curso_id, ordem_sugerida) VALUES (?, ?, ?)',
+            [trilhaId, cursoId, ultima[0].ordem + 1]
         );
         return true;
     }
 
     static async removerCurso(usuarioId, progressoId) {
-        const [resultado] = await db.query(
-            `DELETE p FROM progresso p
-             INNER JOIN trilha t ON t.id = p.trilha_id
-             WHERE p.id = ? AND t.usuario_id = ?`,
-            [progressoId, usuarioId]
-        );
-        return resultado.affectedRows > 0;
+        const ehDele = await Trilha.ehDoUsuario(usuarioId, progressoId);
+        if (!ehDele) {
+            return false;
+        }
+
+        await db.query('DELETE FROM progresso WHERE id = ?', [progressoId]);
+        return true;
     }
 }
 

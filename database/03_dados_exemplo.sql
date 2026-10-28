@@ -1,5 +1,5 @@
 -- Dados iniciais do Startpoint
--- Rodar depois do Startpoint_SQL.sql
+-- Rodar depois do 02_Startpoint_SQL.sql
 
 USE startpoint_db;
 

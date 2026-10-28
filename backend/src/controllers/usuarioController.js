@@ -18,14 +18,15 @@ async function cadastrar(req, res) {
     }
 
     try {
-        const existe = await Usuario.buscarPorEmail(email);
+        const emailLimpo = email.trim().toLowerCase();
+        const existe = await Usuario.buscarPorEmail(emailLimpo);
         if (existe) {
             return res.status(409).json({ erro: 'Este e-mail já está cadastrado.' });
         }
 
         // salva só o hash da senha
         const senhaHash = await bcrypt.hash(senha, 10);
-        const id = await Usuario.criar(nome.trim(), email.trim().toLowerCase(), senhaHash);
+        const id = await Usuario.criar(nome.trim(), emailLimpo, senhaHash);
 
         res.status(201).json({ mensagem: 'Conta criada com sucesso!', id });
     } catch (erro) {

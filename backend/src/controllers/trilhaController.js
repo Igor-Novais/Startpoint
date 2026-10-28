@@ -32,7 +32,10 @@ async function buscar(req, res) {
 
         let aderenciaMedia = 0;
         if (vagas.length > 0) {
-            const soma = vagas.reduce((total, v) => total + v.aderencia, 0);
+            let soma = 0;
+            vagas.forEach(v => {
+                soma += v.aderencia;
+            });
             aderenciaMedia = Math.round(soma / vagas.length);
         }
 

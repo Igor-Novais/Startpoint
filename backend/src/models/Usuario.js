@@ -35,11 +35,14 @@ class Usuario {
         await db.query('DELETE FROM usuario_competencia WHERE usuario_id = ?', [id]);
 
         if (competencias.length > 0) {
-            await db.query(
-                `INSERT INTO usuario_competencia (usuario_id, competencia_id)
-                 SELECT ?, id FROM competencia WHERE nome IN (?)`,
-                [id, competencias]
-            );
+            const [marcadas] = await db.query('SELECT id FROM competencia WHERE nome IN (?)', [competencias]);
+
+            for (const competencia of marcadas) {
+                await db.query(
+                    'INSERT INTO usuario_competencia (usuario_id, competencia_id) VALUES (?, ?)',
+                    [id, competencia.id]
+                );
+            }
         }
     }
 

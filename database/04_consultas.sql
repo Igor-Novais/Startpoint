@@ -13,13 +13,11 @@ INNER JOIN instituicao i ON i.id = c.instituicao_id
 WHERE c.status = 'ativo'
 ORDER BY c.area, c.nome;
 
--- 2) Cursos de uma área com uma palavra no nome ou na instituição (LIKE)
-SELECT c.nome, i.nome AS instituicao, c.duracao, c.modalidade
-FROM curso c
-INNER JOIN instituicao i ON i.id = c.instituicao_id
-WHERE c.status = 'ativo'
-  AND c.area = 'Tecnologia'
-  AND (c.nome LIKE '%dados%' OR i.nome LIKE '%dados%');
+-- 2) Áreas que têm curso, sem repetir (filtro de área da tela Vagas)
+SELECT DISTINCT area
+FROM curso
+WHERE status = 'ativo'
+ORDER BY area;
 
 -- 3) Trilha de um usuário na ordem sugerida, com a situação de cada curso (tela Trilha)
 SELECT p.ordem_sugerida, c.nome, i.nome AS instituicao, c.duracao,
@@ -55,10 +53,10 @@ WHERE t.usuario_id = 1 AND p.concluido = TRUE;
 -- 6) Aderência do usuário a cada vaga (requisitos atendidos / total)
 SELECT v.titulo, v.empresa, v.bolsa,
        COUNT(*) AS total_requisitos,
-       SUM(vc.competencia_id IN (SELECT competencia_id FROM usuario_competencia
-                                 WHERE usuario_id = 1)) AS atendidos,
-       ROUND(SUM(vc.competencia_id IN (SELECT competencia_id FROM usuario_competencia
-                                       WHERE usuario_id = 1)) / COUNT(*) * 100) AS aderencia
+       SUM(CASE WHEN vc.competencia_id IN (SELECT competencia_id FROM usuario_competencia
+                                           WHERE usuario_id = 1) THEN 1 ELSE 0 END) AS atendidos,
+       ROUND(SUM(CASE WHEN vc.competencia_id IN (SELECT competencia_id FROM usuario_competencia
+                                                 WHERE usuario_id = 1) THEN 1 ELSE 0 END) / COUNT(*) * 100) AS aderencia
 FROM vaga v
 INNER JOIN vaga_competencia vc ON vc.vaga_id = v.id
 WHERE v.status = 'ativo'
@@ -128,10 +126,12 @@ WHERE status = 'ativo'
 ORDER BY bolsa DESC
 LIMIT 3;
 
--- 15) Áreas que têm vaga (sem repetir)
-SELECT DISTINCT area
-FROM vaga
-WHERE status = 'ativo';
+-- 15) Cursos com uma palavra no nome ou na instituição (LIKE)
+SELECT c.nome, i.nome AS instituicao, c.duracao, c.modalidade
+FROM curso c
+INNER JOIN instituicao i ON i.id = c.instituicao_id
+WHERE c.status = 'ativo'
+  AND (c.nome LIKE '%dados%' OR i.nome LIKE '%dados%');
 
 -- 16) Instituições que têm pelo menos um curso ativo
 SELECT nome

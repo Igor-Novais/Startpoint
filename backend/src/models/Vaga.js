@@ -11,7 +11,7 @@ class Vaga {
             SELECT v.id, v.titulo, v.empresa, v.area, v.cidade, v.bolsa, v.modalidade,
                    v.link_candidatura,
                    COUNT(vc.competencia_id) AS total_requisitos,
-                   SUM(vc.competencia_id IN (?)) AS requisitos_atendidos
+                   SUM(CASE WHEN vc.competencia_id IN (?) THEN 1 ELSE 0 END) AS requisitos_atendidos
             FROM vaga v
             INNER JOIN vaga_competencia vc ON vc.vaga_id = v.id
             WHERE v.status = 'ativo'`;
@@ -51,7 +51,7 @@ class Vaga {
                     (SELECT cu.nome FROM curso_competencia cc
                      INNER JOIN curso cu ON cu.id = cc.curso_id
                      WHERE cc.competencia_id = c.id AND cu.status = 'ativo'
-                     ORDER BY cu.area = v.area DESC, cu.duracao
+                     ORDER BY CASE WHEN cu.area = v.area THEN 0 ELSE 1 END, cu.duracao
                      LIMIT 1) AS curso
              FROM vaga_competencia vc
              INNER JOIN vaga v ON v.id = vc.vaga_id

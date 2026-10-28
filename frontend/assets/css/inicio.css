@@ -170,7 +170,7 @@ main > section:nth-of-type(2) > p:nth-of-type(3) {
     color: var(--texto-suave);
     font-size: 14px;
     background:
-        linear-gradient(to right, var(--laranja) var(--progresso, 0%), var(--borda) var(--progresso, 0%))
+        linear-gradient(to right, var(--laranja) 0%, var(--borda) 0%)
         left top / 100% 6px no-repeat;
 }
 
