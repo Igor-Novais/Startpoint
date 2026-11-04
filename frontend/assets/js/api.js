@@ -1,5 +1,9 @@
 // Endereço da API
-const API_URL = 'http://localhost:3000/api';
+// Quando as telas são abertas pelo próprio servidor (porta 3000), usa o mesmo endereço da página.
+// Assim funciona com localhost, 127.0.0.1 e Docker. Abrindo o HTML direto, usa localhost:3000.
+const API_URL = (window.location.protocol.startsWith('http') && window.location.port === '3000')
+    ? '/api'
+    : 'http://localhost:3000/api';
 
 // Dados do login no localStorage
 class Sessao {
