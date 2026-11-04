@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- Criação do banco Startpoint
 -- Depois deste arquivo, rodar o 03_dados_exemplo.sql
 

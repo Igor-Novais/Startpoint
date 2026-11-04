@@ -1,3 +1,4 @@
+SET NAMES utf8mb4;
 -- Dados iniciais do Startpoint
 -- Rodar depois do 02_Startpoint_SQL.sql
 
