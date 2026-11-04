@@ -1,0 +1,40 @@
+# Sobe o banco MySQL e a API do Startpoint em containers
+# Usar: docker compose up --build   e abrir http://localhost:3000
+
+services:
+  banco:
+    image: mysql:8.4
+    environment:
+      MYSQL_ROOT_PASSWORD: startpoint
+    ports:
+      - "3307:3306"
+    volumes:
+      # roda a criação e os dados de exemplo só na primeira vez
+      - ./database/02_Startpoint_SQL.sql:/docker-entrypoint-initdb.d/02_Startpoint_SQL.sql
+      - ./database/03_dados_exemplo.sql:/docker-entrypoint-initdb.d/03_dados_exemplo.sql
+      - dados_banco:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pstartpoint"]
+      interval: 5s
+      retries: 30
+
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      PORTA: 3000
+      DB_HOST: banco
+      DB_PORT: 3306
+      DB_USUARIO: root
+      DB_SENHA: startpoint
+      DB_NOME: startpoint_db
+      JWT_SEGREDO: troque-esta-chave
+    ports:
+      - "3000:3000"
+    depends_on:
+      banco:
+        condition: service_healthy
+
+volumes:
+  dados_banco:

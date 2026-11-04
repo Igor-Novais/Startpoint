@@ -23,6 +23,7 @@ backend/
     routes/        endpoints da API
     server.js      sobe o servidor e entrega as telas
   testes/          teste automático da API
+  Dockerfile       imagem da API para o Docker
 database/
   01_criacao_tabelas.mwb   modelo no MySQL Workbench
   02_Startpoint_SQL.sql    criação das tabelas e índices
@@ -33,6 +34,7 @@ frontend/
   assets/css/      estilos de cada tela
   assets/js/       scripts (api.js, comum.js, modelos.js e um arquivo por tela)
 documentos/        entregas do projeto
+docker-compose.yml sobe o banco e a API no Docker
 ```
 
 ## Como rodar
@@ -48,6 +50,23 @@ documentos/        entregas do projeto
 Usuário de teste: `ana@teste.com` / senha `123456` (ou crie uma conta nova).
 
 Para rodar o teste da API, com o servidor ligado, abrir outro terminal na pasta `backend` e rodar `npm test`.
+
+### Com Docker (opcional)
+Não precisa instalar MySQL nem Node: só o Docker Desktop (no Windows ele pede o WSL, que se instala com `wsl --install` no PowerShell como administrador, seguido de reiniciar o computador).
+
+1. Abrir o Docker Desktop e esperar aparecer "Engine running".
+2. Abrir o PowerShell na pasta principal do projeto (a que tem o `docker-compose.yml`).
+3. Rodar:
+   ```
+   docker compose up --build
+   ```
+   Na primeira vez baixa o MySQL e o Node e leva alguns minutos. Ele sobe o banco (já com o `02_Startpoint_SQL.sql` e o `03_dados_exemplo.sql`) e a API.
+4. Abrir http://localhost:3000 (se não abrir, usar http://127.0.0.1:3000) e entrar com `ana@teste.com` / `123456`.
+
+- Para rodar em segundo plano, sem deixar o terminal aberto: `docker compose up -d`.
+- Para desligar: `docker compose down`.
+- Para apagar o banco do Docker e começar do zero: `docker compose down -v`.
+- O banco do Docker usa a porta 3307, então não briga com o MySQL instalado no computador. No Workbench: host `127.0.0.1`, porta `3307`, usuário `root`, senha `startpoint`.
 
 ## Endpoints
 | Método | Rota | O que faz |
