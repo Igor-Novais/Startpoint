@@ -191,7 +191,7 @@ main section > h2 {
         width: 100%;
     }
 }
-
+/*botao de cadastrar a vaga*/
 .btn-cadastrar-vaga {
     display: inline-flex;
     align-items: center;
