@@ -192,11 +192,13 @@ main section > h2 {
     }
 }
 /*botao de cadastrar a vaga*/
+.vagas-cabecalho {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 28px;
+}
+
 .btn-cadastrar-vaga {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 0 28px auto;
     padding: 12px 18px;
     border-radius: 12px;
     background: var(--laranja);
