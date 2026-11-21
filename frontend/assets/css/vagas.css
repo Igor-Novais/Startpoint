@@ -194,20 +194,66 @@ main section > h2 {
 /*botao de cadastrar a vaga*/
 .vagas-cabecalho {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
     margin-bottom: 28px;
 }
 
+.vagas-cabecalho > div > p {
+    margin: 0;
+}
+
+.vagas-cabecalho .vagas-etiqueta {
+    margin-bottom: 12px;
+    color: var(--laranja-escuro);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.vagas-cabecalho h1 {
+    margin: 0 0 8px;
+}
+
 .btn-cadastrar-vaga {
-    padding: 12px 18px;
-    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-shrink: 0;
+    padding: 16px 24px;
+    border-radius: 16px;
     background: var(--laranja);
     color: #fff;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 700;
     text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-cadastrar-vaga span {
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1;
 }
 
 .btn-cadastrar-vaga:hover {
     background: var(--laranja-escuro);
+}
+
+.btn-cadastrar-vaga:focus-visible {
+    outline: 3px solid var(--laranja-escuro);
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    .vagas-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .btn-cadastrar-vaga {
+        width: 100%;
+    }
 }
