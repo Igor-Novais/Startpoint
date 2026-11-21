@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cadastre uma nova oportunidade de trabalho.">
+    <title>Startpoint | Cadastrar vaga</title>
+
+    <link rel="stylesheet" href="assets/css/painel.css">
+    <link rel="stylesheet" href="assets/css/vagas.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
+    <link rel="stylesheet" href="assets/css/cadastrar-vaga.css">
+</head>
+
+<body>
+    <header>
+        <a href="inicio.html">startpoint</a>
+        <button type="button" id="btn-tema">Alterar tema</button>
+        <button type="button">Notificações</button>
+        <button type="button" data-ir="perfil.html">Perfil</button>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="inicio.html">Início</a></li>
+            <li><a href="trilha.html">Trilha</a></li>
+            <li><a href="cursos.html">Cursos</a></li>
+            <li><a href="vagas.html" aria-current="page">Vagas</a></li>
+            <li><a href="perfil.html">Perfil</a></li>
+        </ul>
+    </nav>
+
+    <main class="pagina-cadastro-vaga">
+        <a class="link-voltar" href="vagas.html">← Voltar para vagas</a>
+
+        <div class="cabecalho-cadastro">
+            <p class="etiqueta-cadastro">PARA EMPRESAS</p>
+            <h1>Cadastre uma nova vaga</h1>
+            <p>Compartilhe uma oportunidade e encontre jovens prontos para começar.</p>
+        </div>
+
+        <form class="formulario-cadastro-vaga" action="#" method="post">
+            <section class="grupo-formulario">
+                <div class="titulo-grupo">
+                    <span class="numero-grupo">01</span>
+                    <div>
+                        <h2>Identificação da empresa</h2>
+                        <p>Dados para identificar e entrar em contato com a empresa.</p>
+                    </div>
+                </div>
+
+                <div class="grade-campos">
+                    <div class="campo">
+                        <label for="empresa">Nome da empresa <span>*</span></label>
+                        <input
+                            type="text"
+                            id="empresa"
+                            name="empresa"
+                            placeholder="Ex.: Empresa Horizonte"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="email">E-mail para contato <span>*</span></label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="contato@empresa.com.br"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo campo-largo">
+                        <label for="responsavel">Nome do responsável <span>*</span></label>
+                        <input
+                            type="text"
+                            id="responsavel"
+                            name="responsavel"
+                            placeholder="Nome completo"
+                            required
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <section class="grupo-formulario">
+                <div class="titulo-grupo">
+                    <span class="numero-grupo">02</span>
+                    <div>
+                        <h2>Informações da vaga</h2>
+                        <p>Apresente a oportunidade de forma clara e objetiva.</p>
+                    </div>
+                </div>
+
+                <div class="grade-campos">
+                    <div class="campo">
+                        <label for="titulo">Título da vaga <span>*</span></label>
+                        <input
+                            type="text"
+                            id="titulo"
+                            name="titulo"
+                            placeholder="Ex.: Jovem Aprendiz Administrativo"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="area">Área de atuação <span>*</span></label>
+                        <select id="area" name="area" required>
+                            <option value="">Selecione uma área</option>
+                            <option value="administracao">Administração</option>
+                            <option value="atendimento">Atendimento</option>
+                            <option value="logistica">Logística</option>
+                            <option value="tecnologia">Tecnologia</option>
+                            <option value="vendas">Vendas</option>
+                            <option value="outra">Outra</option>
+                        </select>
+                    </div>
+
+                    <div class="campo campo-largo">
+                        <label for="descricao">Descrição da oportunidade <span>*</span></label>
+                        <textarea
+                            id="descricao"
+                            name="descricao"
+                            rows="5"
+                            placeholder="Conte sobre as atividades e a rotina da vaga."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="campo campo-largo">
+                        <label for="requisitos">Requisitos e qualificações <span>*</span></label>
+                        <textarea
+                            id="requisitos"
+                            name="requisitos"
+                            rows="4"
+                            placeholder="Liste os conhecimentos e requisitos necessários."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="campo campo-largo">
+                        <label for="diferenciais">
+                            Diferenciais desejáveis <small>(opcional)</small>
+                        </label>
+                        <textarea
+                            id="diferenciais"
+                            name="diferenciais"
+                            rows="4"
+                            placeholder="Inclua experiências ou conhecimentos que serão valorizados."
+                        ></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label for="experiencia">Nível de experiência <span>*</span></label>
+                        <select id="experiencia" name="experiencia" required>
+                            <option value="">Selecione</option>
+                            <option value="sem-experiencia">Sem experiência</option>
+                            <option value="iniciante">Iniciante</option>
+                            <option value="intermediario">Intermediário</option>
+                            <option value="experiente">Experiente</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="modalidade">Modalidade de trabalho <span>*</span></label>
+                        <select id="modalidade" name="modalidade" required>
+                            <option value="">Selecione</option>
+                            <option value="presencial">Presencial</option>
+                            <option value="hibrido">Híbrido</option>
+                            <option value="remoto">Remoto</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="contratacao">Tipo de contratação <span>*</span></label>
+                        <select id="contratacao" name="contratacao" required>
+                            <option value="">Selecione</option>
+                            <option value="aprendiz">Jovem aprendiz</option>
+                            <option value="estagio">Estágio</option>
+                            <option value="efetivo">Efetivo</option>
+                            <option value="temporario">Temporário</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <section class="grupo-formulario">
+                <div class="titulo-grupo">
+                    <span class="numero-grupo">03</span>
+                    <div>
+                        <h2>Informações adicionais</h2>
+                        <p>Complete os detalhes para ajudar os candidatos.</p>
+                    </div>
+                </div>
+
+                <div class="grade-campos">
+                    <div class="campo">
+                        <label for="cidade">Cidade <span>*</span></label>
+                        <input
+                            type="text"
+                            id="cidade"
+                            name="cidade"
+                            placeholder="Ex.: São Paulo"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="estado">Estado <span>*</span></label>
+                        <input
+                            type="text"
+                            id="estado"
+                            name="estado"
+                            placeholder="Ex.: SP"
+                            maxlength="2"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="salario">Faixa salarial <small>(opcional)</small></label>
+                        <input
+                            type="text"
+                            id="salario"
+                            name="salario"
+                            placeholder="Ex.: R$ 1.200"
+                        >
+                    </div>
+
+                    <div class="campo">
+                        <label for="quantidade">Quantidade de vagas <span>*</span></label>
+                        <input
+                            type="number"
+                            id="quantidade"
+                            name="quantidade"
+                            min="1"
+                            placeholder="Ex.: 2"
+                            required
+                        >
+                    </div>
+
+                    <div class="campo campo-largo">
+                        <label for="beneficios">Benefícios oferecidos <span>*</span></label>
+                        <textarea
+                            id="beneficios"
+                            name="beneficios"
+                            rows="4"
+                            placeholder="Ex.: Vale-transporte, vale-refeição e assistência médica."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="campo">
+                        <label for="data-limite">Data limite para candidatura <span>*</span></label>
+                        <input
+                            type="date"
+                            id="data-limite"
+                            name="data-limite"
+                            required
+                        >
+                    </div>
+                </div>
+            </section>
+
+            <div class="acoes-formulario">
+                <p class="nota-obrigatorios"><span>*</span> Campos obrigatórios</p>
+
+                <div class="botoes-formulario">
+                    <a class="botao-cancelar" href="vagas.html">Cancelar</a>
+                    <button class="botao-publicar" type="submit">
+                        Publicar vaga
+                    </button>
+                </div>
+            </div>
+        </form>
+    </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+</body>
+</html>
