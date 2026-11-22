@@ -13,88 +13,11 @@
     box-sizing: border-box;
 }
 
-body {
-    min-height: 100vh;
-    margin: 0;
-    padding: 0 24px 48px;
-    background: var(--bg);
-    color: var(--text);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-header,
-nav,
 main {
     width: 100%;
     max-width: 1200px;
     margin-right: auto;
     margin-left: auto;
-}
-
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    min-height: 76px;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
-}
-
-header a {
-    color: var(--text);
-    font-size: 21px;
-    font-weight: 800;
-    letter-spacing: -0.7px;
-    text-decoration: none;
-}
-
-header button {
-    min-height: 40px;
-    margin-left: 8px;
-    padding: 8px 13px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: var(--surface);
-    color: var(--text);
-    font: inherit;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-nav {
-    padding-top: 12px;
-}
-
-nav ul {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-nav a,
-nav button {
-    display: inline-flex;
-    align-items: center;
-    min-height: 42px;
-    padding: 0 16px;
-    border: 0;
-    border-radius: 12px;
-    background: transparent;
-    color: var(--muted);
-    font: inherit;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-nav a[aria-current="page"] {
-    background: var(--orange-soft);
-    color: var(--orange-dark);
 }
 
 main {
@@ -290,56 +213,6 @@ a:focus-visible {
 }
 
 @media (max-width: 620px) {
-    body {
-        padding: 0 16px 94px;
-    }
-
-    header {
-        min-height: 68px;
-    }
-
-    header button {
-        min-height: 36px;
-        margin-left: 3px;
-        padding: 7px 9px;
-        font-size: 11px;
-    }
-
-    nav {
-        position: fixed;
-        z-index: 10;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        max-width: none;
-        padding: 8px 8px max(8px, env(safe-area-inset-bottom));
-        border-top: 1px solid var(--line);
-        background: var(--surface);
-        box-shadow: 0 -5px 20px rgb(22 22 22 / 5%);
-    }
-
-    nav ul {
-        justify-content: space-around;
-        gap: 2px;
-    }
-
-    nav li {
-        flex: 1;
-    }
-
-    nav a,
-    nav button {
-        min-height: 50px;
-        justify-content: center;
-        padding: 4px 2px;
-        font-size: 10px;
-    }
-
-    nav li:last-child {
-        display: none;
-    }
-
     main {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -365,44 +238,8 @@ a:focus-visible {
     }
 }
 
-body {
-    padding: 0 40px 48px 270px;
-}
-
-header,
 main {
     max-width: 1200px;
-}
-
-nav {
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    width: 230px;
-    max-width: none;
-    margin: 0;
-    padding: 96px 16px 24px;
-    border-right: 1px solid var(--line);
-    background: var(--surface);
-}
-
-nav ul {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-}
-
-nav li {
-    width: 100%;
-}
-
-nav a,
-nav button {
-    width: 100%;
-    justify-content: flex-start;
-    text-align: left;
 }
 
 main {
@@ -410,71 +247,15 @@ main {
 }
 
 @media (max-width: 900px) {
-    body {
-        padding-left: 230px;
-    }
-
-    nav {
-        width: 200px;
-    }
-
     main {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
+/* no celular o menu fica no topo, igual às telas Vagas e Perfil */
 @media (max-width: 620px) {
-    body {
-        padding: 0 14px 32px 166px;
-    }
-
-    nav {
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: 150px;
-        padding: 80px 10px 16px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 6px;
-    }
-
-    nav a,
-    nav button {
-        min-height: 42px;
-        padding: 8px;
-        font-size: 12px;
-    }
-
     main {
         grid-template-columns: 1fr;
         padding-top: 30px;
     }
-
-    header {
-        align-items: flex-start;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    header button {
-        margin-left: 0;
-        padding: 7px;
-        font-size: 11px;
-    }
-}
-
-header {
-    justify-content: flex-start;
-    gap: 8px;
-}
-
-header a {
-    margin-right: auto;
-}
-
-header button {
-    margin-left: 0;
 }

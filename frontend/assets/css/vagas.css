@@ -154,6 +154,19 @@ main section > h2 {
     text-decoration: underline;
 }
 
+.vaga-descricao {
+    margin: 4px 0 0;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+.vaga-prazo {
+    margin: 2px 0 0;
+    color: var(--laranja-escuro);
+    font-size: 13px;
+    font-weight: 700;
+}
+
 .vaga-completa {
     margin: 6px 0 0;
     padding: 10px 12px;

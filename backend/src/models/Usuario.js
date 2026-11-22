@@ -2,10 +2,10 @@ const db = require('../config/db');
 
 class Usuario {
 
-    static async criar(nome, email, senhaHash) {
+    static async criar(nome, email, senhaHash, perfil) {
         const [resultado] = await db.query(
-            'INSERT INTO usuario (nome_completo, email, senha_hash) VALUES (?, ?, ?)',
-            [nome, email, senhaHash]
+            'INSERT INTO usuario (nome_completo, email, senha_hash, perfil) VALUES (?, ?, ?, ?)',
+            [nome, email, senhaHash, perfil]
         );
         return resultado.insertId;
     }
@@ -17,7 +17,7 @@ class Usuario {
 
     static async buscarPorId(id) {
         const [linhas] = await db.query(
-            `SELECT id, nome_completo, email, escolaridade, regiao, area_interesse, data_cadastro
+            `SELECT id, nome_completo, email, escolaridade, regiao, area_interesse, perfil, data_cadastro
              FROM usuario WHERE id = ?`,
             [id]
         );
@@ -69,6 +69,19 @@ class Usuario {
             [id, id]
         );
         return linhas.map(l => l.competencia_id);
+    }
+
+    // Números do painel do administrador
+    static async resumo() {
+        const [linhas] = await db.query(
+            `SELECT
+                (SELECT COUNT(*) FROM usuario WHERE perfil = 'jovem') AS jovens,
+                (SELECT COUNT(*) FROM usuario WHERE perfil = 'empresa') AS empresas,
+                (SELECT COUNT(*) FROM vaga WHERE status = 'ativo') AS vagas_ativas,
+                (SELECT COUNT(*) FROM vaga WHERE status = 'pendente') AS vagas_pendentes,
+                (SELECT COUNT(*) FROM curso WHERE status = 'ativo') AS cursos_ativos`
+        );
+        return linhas[0];
     }
 }
 

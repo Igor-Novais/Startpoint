@@ -1,6 +1,6 @@
 // Tela Perfil
 
-Sessao.exigirLogin();
+const liberado = Sessao.exigirLogin();
 
 const mensagem = document.getElementById('mensagem');
 
@@ -46,4 +46,7 @@ document.getElementById('btn-editar').addEventListener('click', () => {
     window.location.href = 'diagnostico-1.html';
 });
 
-carregarPerfil();
+// só carrega se a pessoa pode ficar nesta tela
+if (liberado) {
+    carregarPerfil();
+}

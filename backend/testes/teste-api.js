@@ -99,6 +99,60 @@ async function testar() {
     r = await chamar('GET', '/usuarios/perfil');
     confere('perfil mostra o diagnóstico salvo', r.dados.area_interesse === 'Logística');
 
+    // empresa: cadastro, vaga enviada e permissões
+    const tokenJovem = token;
+    const emailEmpresa = 'empresa' + Date.now() + '@teste.com';
+    r = await chamar('POST', '/usuarios', { nome: 'Empresa Teste', email: emailEmpresa, senha: '123456', perfil: 'empresa' });
+    r = await chamar('POST', '/usuarios/login', { email: emailEmpresa, senha: '123456' });
+    confere('empresa entra com perfil "empresa"', r.dados.usuario && r.dados.usuario.perfil === 'empresa');
+    token = r.dados.token;
+
+    r = await chamar('GET', '/vagas/opcoes');
+    const competenciaLog = r.dados.competencias.find(c => c.area === 'Logística');
+    r = await chamar('POST', '/vagas', {
+        titulo: 'Aprendiz de Teste', area: 'Logística', descricao: 'Vaga criada pelo teste automático.',
+        link_candidatura: 'rh@teste.com', bolsa: 700, quantidade: 1,
+        requisitos: [{ competencia_id: competenciaLog.id, tipo_requisito: 'obrigatoria' }]
+    });
+    confere('empresa cadastra vaga e ela fica pendente', r.status === 201 && r.dados.status === 'pendente');
+    const vagaNova = r.dados.id;
+
+    r = await chamar('POST', '/vagas', { titulo: 'Sem requisito', area: 'Logística', descricao: 'Vaga sem requisito.', link_candidatura: 'x', quantidade: 1, requisitos: [] });
+    confere('vaga sem requisito obrigatório é recusada (400)', r.status === 400);
+
+    r = await chamar('PATCH', '/vagas/' + vagaNova + '/status', { status: 'ativo' });
+    confere('empresa não consegue aprovar a própria vaga (400)', r.status === 400);
+
+    r = await chamar('GET', '/usuarios/resumo');
+    confere('empresa não acessa o painel do administrador (403)', r.status === 403);
+
+    // administrador: aprova a vaga e gerencia cursos
+    r = await chamar('POST', '/usuarios/login', { email: 'admin@startpoint.com', senha: 'admin123' });
+    confere('administrador entra com perfil "admin"', r.dados.usuario && r.dados.usuario.perfil === 'admin');
+    token = r.dados.token;
+
+    r = await chamar('PATCH', '/vagas/' + vagaNova + '/status', { status: 'ativo' });
+    confere('administrador aprova a vaga', r.status === 200);
+
+    r = await chamar('GET', '/cursos/opcoes');
+    r = await chamar('POST', '/cursos', {
+        nome: 'Curso do teste automático', instituicao_id: r.dados.instituicoes[0].id, area: 'Logística',
+        modalidade: 'Online', duracao: 8, link_oficial: 'https://www.exemplo.com', competencias: [competenciaLog.id]
+    });
+    confere('administrador cadastra curso', r.status === 201);
+    const cursoTeste = r.dados.id;
+
+    r = await chamar('PATCH', '/cursos/' + cursoTeste + '/status', { status: 'inativo' });
+    confere('administrador desativa curso', r.status === 200);
+
+    // o jovem passa a ver a vaga aprovada
+    token = tokenJovem;
+    r = await chamar('GET', '/vagas?area=Logística');
+    confere('vaga aprovada aparece para o jovem', r.dados.some(v => v.id === vagaNova));
+
+    r = await chamar('POST', '/cursos', { nome: 'Curso' });
+    confere('jovem não cadastra curso (403)', r.status === 403);
+
     console.log(`\n${passou} testes passaram, ${falhou} falharam.`);
 }
 

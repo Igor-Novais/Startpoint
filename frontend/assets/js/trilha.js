@@ -1,6 +1,6 @@
 // Tela Minha trilha
 
-Sessao.exigirLogin();
+const liberado = Sessao.exigirLogin();
 
 const lista = document.getElementById('lista-trilha');
 const mensagem = document.getElementById('mensagem');
@@ -52,4 +52,7 @@ async function removerDaTrilha(item) {
     }
 }
 
-carregarTrilha();
+// só carrega se a pessoa pode ficar nesta tela
+if (liberado) {
+    carregarTrilha();
+}

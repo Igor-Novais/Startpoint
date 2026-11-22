@@ -135,8 +135,21 @@ class Vaga {
         this.modalidade = dados.modalidade;
         this.bolsa = Number(dados.bolsa);
         this.link = dados.link_candidatura;
+        this.descricao = dados.descricao;
+        this.beneficios = dados.beneficios;
+        this.quantidade = dados.quantidade;
+        this.dataLimite = dados.data_limite;
         this.aderencia = dados.aderencia;
         this.falta = dados.falta || [];
+    }
+
+    // a empresa pode informar um site ou um e-mail para a candidatura
+    candidaturaPorEmail() {
+        return this.link && this.link.includes('@') && !this.link.startsWith('http');
+    }
+
+    linkCandidatura() {
+        return this.candidaturaPorEmail() ? 'mailto:' + this.link : this.link;
     }
 
     bolsaFormatada() {
@@ -168,6 +181,19 @@ class Vaga {
 
         card.append(topo, criarElemento('h3', this.titulo), barra, info);
 
+        if (this.descricao) {
+            card.append(criarElemento('p', this.descricao, 'vaga-descricao'));
+        }
+        if (this.beneficios) {
+            card.append(criarElemento('p', 'Benefícios: ' + this.beneficios, 'vaga-descricao'));
+        }
+        if (this.quantidade > 1) {
+            card.append(criarElemento('p', this.quantidade + ' vagas abertas', 'vaga-descricao'));
+        }
+        if (this.dataLimite) {
+            card.append(criarElemento('p', 'Inscrições até ' + formatarData(this.dataLimite), 'vaga-prazo'));
+        }
+
         if (this.cumpreTudo()) {
             card.append(criarElemento('p', '✓ Você cumpre todos os requisitos desta vaga!', 'vaga-completa'));
         } else {
@@ -193,9 +219,9 @@ class Vaga {
             card.append(lista);
         }
 
-        // abre o site da vaga se a pessoa confirmar
+        // abre o site (ou o e-mail) da vaga se a pessoa confirmar
         const botao = criarElemento('a', 'Quero me candidatar', 'vaga-botao');
-        botao.href = this.link;
+        botao.href = this.linkCandidatura();
         botao.target = '_blank';
         botao.addEventListener('click', (e) => {
             if (!aoCandidatar(this)) {
@@ -205,5 +231,145 @@ class Vaga {
         card.append(botao);
 
         return card;
+    }
+}
+
+// Telas da empresa e do administrador
+
+// Item com título, detalhes, situação e botões (base das listas de gestão)
+class ItemGestao {
+
+    constructor(dados) {
+        this.id = dados.id;
+        this.status = dados.status;
+    }
+
+    // texto da etiqueta de situação (as classes filhas sobrescrevem)
+    situacaoTexto() {
+        return this.status;
+    }
+
+    titulo() {
+        return '';
+    }
+
+    detalhes() {
+        return [];
+    }
+
+    // acoes: [{ texto, classe, aoClicar }] ou [{ texto, link }]
+    criarItem(acoes) {
+        const item = criarElemento('li', null, 'item-gestao');
+
+        const info = criarElemento('div', null, 'item-info');
+        const titulo = criarElemento('h3', this.titulo());
+        titulo.append(criarElemento('span', this.situacaoTexto(), 'situacao ' + this.status));
+        info.append(titulo);
+        this.detalhes().forEach(texto => info.append(criarElemento('p', texto)));
+
+        const botoes = criarElemento('div', null, 'item-acoes');
+        acoes.forEach(acao => {
+            let botao;
+            if (acao.link) {
+                botao = criarElemento('a', acao.texto);
+                botao.href = acao.link;
+            } else {
+                botao = criarElemento('button', acao.texto, acao.classe);
+                botao.type = 'button';
+                botao.addEventListener('click', () => acao.aoClicar(this));
+            }
+            botoes.append(botao);
+        });
+
+        item.append(info, botoes);
+        return item;
+    }
+}
+
+class VagaGestao extends ItemGestao {
+
+    constructor(dados) {
+        super(dados);
+        this.tituloVaga = dados.titulo;
+        this.empresa = dados.empresa;
+        this.area = dados.area;
+        this.bolsa = dados.bolsa;
+        this.quantidade = dados.quantidade;
+        this.requisitos = dados.requisitos;
+        this.dataLimite = dados.data_limite;
+        this.atualizada = dados.data_verificacao;
+        this.descricao = dados.descricao;
+        this.listaRequisitos = dados.lista_requisitos;
+        this.candidatura = dados.link_candidatura;
+    }
+
+    situacaoTexto() {
+        const textos = {
+            pendente: 'Aguardando aprovação',
+            ativo: 'Publicada',
+            inativo: 'Encerrada',
+            recusada: 'Recusada'
+        };
+        return textos[this.status] || this.status;
+    }
+
+    titulo() {
+        return this.tituloVaga;
+    }
+
+    detalhes() {
+        let linha = this.empresa + ' · ' + this.area + ' · ' + this.quantidade + ' vaga(s) · ' +
+            this.requisitos + ' requisito(s)';
+        if (this.bolsa) {
+            linha += ' · R$ ' + Number(this.bolsa).toFixed(2).replace('.', ',');
+        }
+
+        const linhas = [linha];
+
+        // o administrador precisa ver o conteúdo da vaga antes de aprovar
+        if (this.descricao) {
+            linhas.push(this.descricao);
+        }
+        if (this.listaRequisitos) {
+            linhas.push('Requisitos: ' + this.listaRequisitos);
+        }
+        if (this.candidatura) {
+            linhas.push('Candidatura: ' + this.candidatura);
+        }
+
+        let datas = 'Atualizada em ' + formatarData(this.atualizada);
+        if (this.dataLimite) {
+            datas += ' · inscrições até ' + formatarData(this.dataLimite);
+        }
+        linhas.push(datas);
+        return linhas;
+    }
+}
+
+class CursoGestao extends ItemGestao {
+
+    constructor(dados) {
+        super(dados);
+        this.nome = dados.nome;
+        this.instituicao = dados.instituicao;
+        this.area = dados.area;
+        this.duracao = dados.duracao;
+        this.modalidade = dados.modalidade;
+        this.competencias = dados.competencias || 'nenhuma';
+    }
+
+    situacaoTexto() {
+        return this.status === 'ativo' ? 'Ativo' : 'Inativo';
+    }
+
+    titulo() {
+        return this.nome;
+    }
+
+    detalhes() {
+        return [
+            this.instituicao + ' · ' + this.area + ' · ' + this.duracao + 'h · ' + this.modalidade,
+            'Ensina: ' + this.competencias
+        ];
     }
 }

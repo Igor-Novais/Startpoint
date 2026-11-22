@@ -1,6 +1,6 @@
 // Tela Cursos
 
-Sessao.exigirLogin();
+const liberado = Sessao.exigirLogin();
 
 const listaCursos = document.getElementById('lista-cursos');
 const mensagem = document.getElementById('mensagem');
@@ -36,4 +36,7 @@ async function adicionarNaTrilha(curso, botao) {
     }
 }
 
-carregarCursos();
+// só carrega se a pessoa pode ficar nesta tela
+if (liberado) {
+    carregarCursos();
+}

@@ -2,7 +2,7 @@
 
 // já logado
 if (Sessao.estaLogado()) {
-    window.location.href = 'inicio.html';
+    window.location.href = Sessao.paginaInicial();
 }
 
 const formLogin = document.getElementById('form-login');
@@ -25,10 +25,13 @@ formLogin.addEventListener('submit', async (e) => {
         const resposta = await Api.post('/usuarios/login', { email, senha });
         Sessao.salvar(resposta.token, resposta.usuario);
 
-        // primeiro acesso vai para o diagnóstico
-        if (resposta.usuario.diagnosticoFeito) {
+        // empresa e administrador têm o próprio painel
+        if (resposta.usuario.perfil !== 'jovem') {
+            window.location.href = Sessao.paginaInicial();
+        } else if (resposta.usuario.diagnosticoFeito) {
             window.location.href = 'inicio.html';
         } else {
+            // primeiro acesso do jovem vai para o diagnóstico
             window.location.href = 'diagnostico-1.html';
         }
     } catch (erro) {

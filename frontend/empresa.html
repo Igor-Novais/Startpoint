@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Acompanhe as vagas que sua empresa cadastrou no Startpoint.">
+    <title>Startpoint | Minhas vagas</title>
+
+    <link rel="stylesheet" href="assets/css/painel.css">
+    <link rel="stylesheet" href="assets/css/vagas.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
+    <link rel="stylesheet" href="assets/css/gestao.css">
+</head>
+
+<body>
+    <header>
+        <a href="empresa.html">startpoint</a>
+        <button type="button" id="btn-tema">Alterar tema</button>
+        <button type="button" data-sair>Sair</button>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="empresa.html" aria-current="page">Minhas vagas</a></li>
+            <li><a href="cadastrar_vaga.html">Cadastrar vaga</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="vagas-cabecalho">
+            <div>
+                <p class="vagas-etiqueta">PARA EMPRESAS</p>
+                <h1>Olá, <span id="nome-empresa">empresa</span></h1>
+                <p>Cadastre vagas de Jovem Aprendiz e acompanhe a aprovação.</p>
+            </div>
+
+            <a href="cadastrar_vaga.html" class="btn-cadastrar-vaga">
+                <span aria-hidden="true">+</span>
+                Cadastrar nova vaga
+            </a>
+        </div>
+
+        <section class="bloco-gestao">
+            <div class="bloco-titulo">
+                <h2>Minhas vagas</h2>
+            </div>
+
+            <p>
+                Toda vaga nova ou alterada passa pelo administrador do Startpoint antes de aparecer para os jovens.
+            </p>
+
+            <p id="mensagem" class="mensagem"></p>
+
+            <ul id="lista-vagas-gestao" class="lista-gestao"></ul>
+        </section>
+    </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/modelos.js"></script>
+    <script src="assets/js/empresa.js"></script>
+</body>
+</html>

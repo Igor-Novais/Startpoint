@@ -120,6 +120,46 @@ form small {
     font-size: 12px;
 }
 
+/* jovem ou empresa */
+.tipo-conta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin: 0 0 16px;
+    padding: 0;
+    border: 0;
+}
+
+.tipo-conta legend {
+    margin-bottom: 8px;
+    padding: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.tipo-conta label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background-color: var(--surface);
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.tipo-conta input {
+    width: auto;
+    margin: 0;
+    accent-color: var(--orange);
+}
+
+.tipo-conta label:has(input:checked) {
+    border-color: var(--orange);
+    background-color: var(--orange-soft);
+}
+
 /* senhas diferentes */
 input.campo-erro {
     border-color: #c2410c;

@@ -7,6 +7,9 @@ const Trilha = require('../models/Trilha');
 async function cadastrar(req, res) {
     const { nome, email, senha } = req.body;
 
+    // a conta de administrador não pode ser criada pela tela
+    const perfil = req.body.perfil === 'empresa' ? 'empresa' : 'jovem';
+
     if (!nome || nome.trim().length < 3) {
         return res.status(400).json({ erro: 'Informe seu nome (mínimo 3 letras).' });
     }
@@ -26,7 +29,7 @@ async function cadastrar(req, res) {
 
         // salva só o hash da senha
         const senhaHash = await bcrypt.hash(senha, 10);
-        const id = await Usuario.criar(nome.trim(), emailLimpo, senhaHash);
+        const id = await Usuario.criar(nome.trim(), emailLimpo, senhaHash, perfil);
 
         res.status(201).json({ mensagem: 'Conta criada com sucesso!', id });
     } catch (erro) {
@@ -51,7 +54,7 @@ async function login(req, res) {
         }
 
         const token = jwt.sign(
-            { id: usuario.id, nome: usuario.nome_completo },
+            { id: usuario.id, nome: usuario.nome_completo, perfil: usuario.perfil },
             process.env.JWT_SEGREDO,
             { expiresIn: '8h' }
         );
@@ -62,6 +65,7 @@ async function login(req, res) {
                 id: usuario.id,
                 nome: usuario.nome_completo,
                 email: usuario.email,
+                perfil: usuario.perfil,
                 diagnosticoFeito: usuario.area_interesse !== null
             }
         });
@@ -110,4 +114,14 @@ async function salvarDiagnostico(req, res) {
     }
 }
 
-module.exports = { cadastrar, login, perfil, salvarDiagnostico };
+// GET /api/usuarios/resumo (administrador)
+async function resumo(req, res) {
+    try {
+        res.json(await Usuario.resumo());
+    } catch (erro) {
+        console.log('Erro no resumo:', erro.message);
+        res.status(500).json({ erro: 'Não foi possível carregar o resumo.' });
+    }
+}
+
+module.exports = { cadastrar, login, perfil, salvarDiagnostico, resumo };

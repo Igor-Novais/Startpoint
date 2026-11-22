@@ -1,6 +1,6 @@
 // Tela Vagas
 
-Sessao.exigirLogin();
+const liberado = Sessao.exigirLogin();
 
 const listaVagas = document.getElementById('lista-vagas');
 const filtroCidade = document.getElementById('localizacao');
@@ -58,17 +58,22 @@ async function carregarVagas() {
     }
 }
 
-// botão "Quero me candidatar" (true = abre o site da vaga)
+// botão "Quero me candidatar" (true = abre o site ou o e-mail da vaga)
 function abrirCandidatura(vaga) {
+    const destino = vaga.candidaturaPorEmail() ? 'Escrever para o e-mail da empresa?' : 'Abrir o site da vaga?';
+
     if (vaga.cumpreTudo()) {
-        return confirm('Você cumpre todos os requisitos desta vaga. Abrir o site para se candidatar?');
+        return confirm('Você cumpre todos os requisitos desta vaga. ' + destino);
     }
 
     return confirm(`Ainda faltam ${vaga.falta.length} requisito(s) para esta vaga. ` +
-        'Você pode se candidatar mesmo assim, mas concluir os cursos aumenta suas chances. Abrir o site da vaga?');
+        'Você pode se candidatar mesmo assim, mas concluir os cursos aumenta suas chances. ' + destino);
 }
 
 filtroCidade.addEventListener('change', carregarVagas);
 filtroArea.addEventListener('change', carregarVagas);
 
-iniciar();
+// só carrega se a pessoa pode ficar nesta tela
+if (liberado) {
+    iniciar();
+}

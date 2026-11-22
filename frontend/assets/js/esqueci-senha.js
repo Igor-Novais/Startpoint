@@ -12,6 +12,7 @@ formSenha.addEventListener('submit', (e) => {
         return;
     }
 
-    mostrarMensagem(mensagem, 'Se o e-mail estiver cadastrado, você vai receber as instruções em alguns minutos.', 'sucesso');
-    formSenha.reset();
+    // o envio do e-mail ainda não foi feito (situação "Parcial" na documentação)
+    mostrarMensagem(mensagem, 'O envio do e-mail de recuperação ainda está em desenvolvimento nesta versão. ' +
+        'Por enquanto, fale com o administrador do Startpoint para recuperar o acesso.');
 });

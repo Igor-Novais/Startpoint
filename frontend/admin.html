@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Painel do administrador do Startpoint.">
+    <title>Startpoint | Administração</title>
+
+    <link rel="stylesheet" href="assets/css/painel.css">
+    <link rel="stylesheet" href="assets/css/vagas.css">
+    <link rel="stylesheet" href="assets/css/cadastrar_vaga.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
+    <link rel="stylesheet" href="assets/css/gestao.css">
+</head>
+
+<body>
+    <header>
+        <a href="admin.html">startpoint</a>
+        <button type="button" id="btn-tema">Alterar tema</button>
+        <button type="button" data-sair>Sair</button>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="admin.html" aria-current="page">Painel</a></li>
+            <li><a href="admin_vagas.html">Vagas</a></li>
+            <li><a href="admin_cursos.html">Cursos</a></li>
+            <li><a href="cadastrar_vaga.html">Cadastrar vaga</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="vagas-cabecalho">
+            <div>
+                <p class="vagas-etiqueta">ADMINISTRAÇÃO</p>
+                <h1>Painel do administrador</h1>
+                <p>Aprove as vagas das empresas e mantenha os cursos atualizados.</p>
+            </div>
+        </div>
+
+        <ul class="resumo-gestao">
+            <li class="destaque"><strong id="num-pendentes">0</strong><span>vagas aguardando</span></li>
+            <li><strong id="num-vagas">0</strong><span>vagas publicadas</span></li>
+            <li><strong id="num-cursos">0</strong><span>cursos ativos</span></li>
+            <li><strong id="num-jovens">0</strong><span>jovens</span></li>
+            <li><strong id="num-empresas">0</strong><span>empresas</span></li>
+        </ul>
+
+        <p id="mensagem" class="mensagem"></p>
+
+        <section class="bloco-gestao" id="bloco-vagas">
+            <div class="bloco-titulo">
+                <h2>Vagas aguardando aprovação</h2>
+            </div>
+
+            <ul id="lista-vagas-gestao" class="lista-gestao"></ul>
+        </section>
+    </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/modelos.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

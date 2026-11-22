@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Painel do administrador do Startpoint.">
+    <title>Startpoint | Cursos (administração)</title>
+
+    <link rel="stylesheet" href="assets/css/painel.css">
+    <link rel="stylesheet" href="assets/css/vagas.css">
+    <link rel="stylesheet" href="assets/css/cadastrar_vaga.css">
+    <link rel="stylesheet" href="assets/css/comum.css">
+    <link rel="stylesheet" href="assets/css/gestao.css">
+</head>
+
+<body>
+    <header>
+        <a href="admin.html">startpoint</a>
+        <button type="button" id="btn-tema">Alterar tema</button>
+        <button type="button" data-sair>Sair</button>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="admin.html">Painel</a></li>
+            <li><a href="admin_vagas.html">Vagas</a></li>
+            <li><a href="admin_cursos.html" aria-current="page">Cursos</a></li>
+            <li><a href="cadastrar_vaga.html">Cadastrar vaga</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div class="vagas-cabecalho">
+            <div>
+                <p class="vagas-etiqueta">ADMINISTRAÇÃO</p>
+                <h1>Cursos</h1>
+                <p>Cadastre, edite e desative os cursos usados nas trilhas.</p>
+            </div>
+        </div>
+
+        <p id="mensagem" class="mensagem"></p>
+
+        <section class="bloco-gestao" id="bloco-cursos">
+            <div class="bloco-titulo">
+                <h2>Cursos</h2>
+                <button type="button" id="btn-novo-curso">+ Cadastrar curso</button>
+            </div>
+
+            <form id="form-curso" class="form-curso" hidden>
+                <h3 id="titulo-form-curso">Novo curso</h3>
+
+                <div class="grade-campos">
+                    <div class="campo campo-largo">
+                        <label for="curso-nome">Nome do curso <span>*</span></label>
+                        <input type="text" id="curso-nome" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="curso-instituicao">Instituição <span>*</span></label>
+                        <select id="curso-instituicao" required></select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="curso-area">Área <span>*</span></label>
+                        <select id="curso-area" required></select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="curso-modalidade">Modalidade</label>
+                        <select id="curso-modalidade">
+                            <option>Online</option>
+                            <option>Presencial</option>
+                        </select>
+                    </div>
+
+                    <div class="campo">
+                        <label for="curso-duracao">Duração (horas) <span>*</span></label>
+                        <input type="number" id="curso-duracao" min="1" required>
+                    </div>
+
+                    <div class="campo">
+                        <label for="curso-inscricao">Inscrições</label>
+                        <input type="text" id="curso-inscricao" placeholder="Ex.: Inscrições abertas ou Até 30 nov">
+                    </div>
+
+                    <div class="campo">
+                        <label for="curso-link">Link oficial <span>*</span></label>
+                        <input type="url" id="curso-link" placeholder="https://" required>
+                    </div>
+
+                    <div class="campo campo-largo">
+                        <label>O que o curso ensina <span>*</span></label>
+                        <div id="curso-competencias" class="lista-competencias"></div>
+                    </div>
+                </div>
+
+                <p id="mensagem-curso" class="mensagem"></p>
+
+                <div class="botoes-formulario">
+                    <button type="button" class="botao-cancelar" id="btn-cancelar-curso">Cancelar</button>
+                    <button type="submit" class="botao-publicar">Salvar curso</button>
+                </div>
+            </form>
+
+            <ul id="lista-cursos" class="lista-gestao"></ul>
+        </section>
+    </main>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/comum.js"></script>
+    <script src="assets/js/modelos.js"></script>
+    <script src="assets/js/admin.js"></script>
+</body>
+</html>

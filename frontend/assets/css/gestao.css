@@ -1,0 +1,270 @@
+/* Telas da empresa e do administrador (usa as cores do painel.css) */
+
+/* números do painel */
+.resumo-gestao {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 14px;
+    margin: 0 0 32px;
+    padding: 0;
+    list-style: none;
+}
+
+.resumo-gestao li {
+    padding: 18px 20px;
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    background: var(--branco);
+}
+
+.resumo-gestao strong {
+    display: block;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.resumo-gestao span {
+    color: var(--texto-suave);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.resumo-gestao .destaque {
+    border-color: var(--laranja);
+    background: var(--laranja-claro);
+}
+
+/* título de cada bloco com filtro ou botão do lado */
+.bloco-gestao {
+    margin-bottom: 40px;
+}
+
+.bloco-titulo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.bloco-titulo h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.bloco-titulo select,
+.bloco-titulo button {
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    background: var(--branco);
+    color: var(--texto);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.bloco-titulo button {
+    border-color: var(--laranja);
+    background: var(--laranja);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* lista de vagas ou cursos */
+.lista-gestao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.item-gestao {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 18px 20px;
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    background: var(--branco);
+}
+
+.item-gestao h3 {
+    margin: 0 0 4px;
+    font-size: 17px;
+}
+
+.item-gestao p {
+    margin: 0;
+    color: var(--texto-suave);
+    font-size: 14px;
+}
+
+.item-info {
+    flex: 1 1 280px;
+    min-width: 0;
+}
+
+.item-acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.item-acoes button,
+.item-acoes a {
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    background: var(--branco);
+    color: var(--texto);
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.item-acoes .acao-principal {
+    border-color: var(--laranja);
+    background: var(--laranja);
+    color: #fff;
+}
+
+.item-acoes .acao-perigo {
+    color: #c2410c;
+}
+
+/* situação da vaga ou do curso */
+.situacao {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--chip);
+    color: var(--texto-suave);
+    font-size: 12px;
+    font-weight: 700;
+    vertical-align: middle;
+}
+
+.situacao.pendente {
+    background: #fff4d6;
+    color: #8a5a00;
+}
+
+.situacao.ativo {
+    background: var(--verde-claro);
+    color: var(--verde);
+}
+
+.situacao.recusada {
+    background: #fde8e1;
+    color: #c2410c;
+}
+
+/* formulário de curso do administrador */
+.form-curso {
+    margin-bottom: 20px;
+    padding: 24px;
+    border: 1px solid var(--laranja);
+    border-radius: 18px;
+    background: var(--branco);
+}
+
+.form-curso h3 {
+    margin: 0 0 18px;
+}
+
+/* caixinhas de competências (vaga e curso) */
+.lista-competencias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.lista-competencias p {
+    grid-column: 1 / -1;
+    margin: 6px 0 0;
+    color: var(--texto-suave);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.lista-competencias label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.lista-competencias input {
+    width: auto;
+    min-height: 0;
+    margin: 0;
+    accent-color: var(--laranja);
+}
+
+.lista-competencias label:has(input:checked) {
+    border-color: var(--laranja);
+    background: var(--laranja-claro);
+}
+
+.campo .ajuda {
+    margin: -4px 0 0;
+    color: var(--texto-suave);
+    font-size: 13px;
+}
+
+/* tema escuro */
+body.dark .situacao.pendente {
+    background: #3a2f13;
+    color: #f0c24b;
+}
+
+body.dark .situacao.recusada {
+    background: #3a1d13;
+    color: #ff8a5c;
+}
+
+body.dark .item-acoes .acao-perigo {
+    color: #ff8a5c;
+}
+
+@media (max-width: 760px) {
+    .item-gestao {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .item-info {
+        flex: none;
+        width: 100%;
+    }
+
+    .item-acoes {
+        width: 100%;
+    }
+
+    .item-acoes button,
+    .item-acoes a {
+        flex: 1;
+        text-align: center;
+    }
+}

@@ -21,8 +21,20 @@
         <p>Você está começando sua jornada para conquistar a primeira oportunidade.</p>
 
         <form id="form-cadastro">
+            <fieldset class="tipo-conta">
+                <legend>Tipo de conta</legend>
+                <label>
+                    <input type="radio" name="perfil" value="jovem" checked>
+                    Sou jovem
+                </label>
+                <label>
+                    <input type="radio" name="perfil" value="empresa">
+                    Sou empresa
+                </label>
+            </fieldset>
+
             <div>
-                <label for="name">Nome completo</label>
+                <label for="name" id="rotulo-nome">Nome completo</label>
                 <input
                     type="text"
                     id="name"

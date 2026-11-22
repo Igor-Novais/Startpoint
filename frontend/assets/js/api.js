@@ -32,11 +32,34 @@ class Sessao {
         window.location.href = 'login.html';
     }
 
+    // jovem, empresa ou admin (contas antigas não tinham o campo: são jovens)
+    static perfil() {
+        const usuario = this.usuario();
+        return usuario && usuario.perfil ? usuario.perfil : 'jovem';
+    }
+
+    // tela inicial de cada tipo de conta
+    static paginaInicial() {
+        if (this.perfil() === 'admin') return 'admin.html';
+        if (this.perfil() === 'empresa') return 'empresa.html';
+        return 'inicio.html';
+    }
+
     // usada nas telas que precisam de login
-    static exigirLogin() {
+    // sem parâmetro a tela é só do jovem; ex.: Sessao.exigirLogin(['empresa', 'admin'])
+    // devolve false quando precisou mandar a pessoa para outra tela
+    static exigirLogin(perfis) {
         if (!this.estaLogado()) {
             window.location.href = 'login.html';
+            return false;
         }
+
+        const permitidos = perfis || ['jovem'];
+        if (!permitidos.includes(this.perfil())) {
+            window.location.href = this.paginaInicial();
+            return false;
+        }
+        return true;
     }
 }
 

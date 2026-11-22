@@ -16,6 +16,7 @@ CREATE TABLE usuario (
     escolaridade VARCHAR(100),
     regiao VARCHAR(100),
     area_interesse VARCHAR(100),
+    perfil ENUM('jovem', 'empresa', 'admin') NOT NULL DEFAULT 'jovem', -- Tipo de conta: jovem, empresa que anuncia vagas ou administrador
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -59,15 +60,21 @@ CREATE TABLE curso_competencia (
 -- 6. Tabela das oportunidades reais listadas nas interfaces
 CREATE TABLE vaga (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT, -- Conta da empresa que cadastrou a vaga (vazio quando foi o administrador)
     titulo VARCHAR(150) NOT NULL,
     empresa VARCHAR(150) NOT NULL,
     area VARCHAR(100) NOT NULL,
+    descricao TEXT,
     cidade VARCHAR(100),
     bolsa DECIMAL(10,2),
     modalidade VARCHAR(50),
+    quantidade INT DEFAULT 1,
+    beneficios VARCHAR(255),
+    data_limite DATE, -- Depois dessa data a vaga sai da lista
     link_candidatura VARCHAR(255),
     data_verificacao DATE,
-    status VARCHAR(20) DEFAULT 'ativo' -- Permite manter vagas inativas para preservar o cálculo de progresso anterior
+    status VARCHAR(20) DEFAULT 'ativo', -- pendente (aguarda o administrador), ativo, inativo ou recusada
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE SET NULL
 );
 
 -- 7. Tabela associativa definindo os critérios preenchidos pela vaga
@@ -112,3 +119,4 @@ CREATE TABLE usuario_competencia (
 CREATE INDEX idx_curso_area ON curso(area);
 CREATE INDEX idx_vaga_area ON vaga(area);
 CREATE INDEX idx_vaga_cidade ON vaga(cidade);
+CREATE INDEX idx_vaga_status ON vaga(status);

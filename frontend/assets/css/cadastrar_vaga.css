@@ -44,6 +44,7 @@
 main > form.formulario-cadastro-vaga {
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap; /* com wrap (do vagas.css) sobrava espaço vazio dentro dos blocos */
     gap: 22px;
     margin: 0;
 }
@@ -171,6 +172,7 @@ main > form.formulario-cadastro-vaga {
 
 .botoes-formulario {
     display: flex;
+    flex-direction: row; /* o vagas.css deixa as divs do form em coluna */
     justify-content: flex-end;
     gap: 12px;
 }

@@ -1,6 +1,6 @@
 // Tela Início
 
-Sessao.exigirLogin();
+const liberado = Sessao.exigirLogin();
 
 async function carregarInicio() {
     // data de hoje
@@ -66,4 +66,7 @@ function mostrarProximo(trilha) {
     }
 }
 
-carregarInicio();
+// só carrega se a pessoa pode ficar nesta tela
+if (liberado) {
+    carregarInicio();
+}

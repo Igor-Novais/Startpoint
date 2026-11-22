@@ -105,6 +105,24 @@ INSERT INTO vaga_competencia (vaga_id, competencia_id, tipo_requisito) VALUES
 (10, 18, 'obrigatoria'), (10, 16, 'obrigatoria'), (10, 17, 'obrigatoria'),
 (11, 11, 'obrigatoria'), (11, 13, 'obrigatoria');
 
--- Usuário de teste (senha: 123456)
-INSERT INTO usuario (nome_completo, email, senha_hash) VALUES
-('Ana Souza', 'ana@teste.com', '$2a$10$eZ3LOoZz0sy1Ub0gj0caQuzWG6X.zvc7nIMCwECx9wmJy.O5dYUYy');
+-- Usuários de teste
+-- jovem: ana@teste.com / 123456
+-- empresa: empresa@teste.com / 123456
+-- administrador: admin@startpoint.com / admin123
+INSERT INTO usuario (id, nome_completo, email, senha_hash, perfil) VALUES
+(1, 'Ana Souza', 'ana@teste.com', '$2a$10$eZ3LOoZz0sy1Ub0gj0caQuzWG6X.zvc7nIMCwECx9wmJy.O5dYUYy', 'jovem'),
+(2, 'LogiSul Distribuidora', 'empresa@teste.com', '$2a$10$Uda2IeoUg3.4rAOJWGeKhe2bt84LT2t/jJpXNv1jTYEJ.juuoH4d.', 'empresa'),
+(3, 'Administrador Startpoint', 'admin@startpoint.com', '$2a$10$CCDDPSc0mHcs.BTZhjsNA.wlnK1b9p2eCYY1ReXe7QKhVcKCmPYOu', 'admin');
+
+-- Vagas da LogiSul ficam ligadas à conta da empresa
+UPDATE vaga SET usuario_id = 2 WHERE id IN (1, 11);
+
+-- Vaga enviada pela empresa e ainda não aprovada pelo administrador
+INSERT INTO vaga (id, usuario_id, titulo, empresa, area, descricao, cidade, bolsa, modalidade, quantidade, beneficios, data_limite, link_candidatura, data_verificacao, status) VALUES
+(12, 2, 'Aprendiz de Almoxarifado', 'LogiSul Distribuidora', 'Logística',
+ 'Apoio na conferência de mercadorias, organização do almoxarifado e registro de entradas e saídas.',
+ 'São Paulo/SP', 750.00, 'Presencial', 2, 'Vale-transporte e vale-refeição', '2026-12-15',
+ 'rh@logisul.com.br', CURRENT_DATE, 'pendente');
+
+INSERT INTO vaga_competencia (vaga_id, competencia_id, tipo_requisito) VALUES
+(12, 11, 'obrigatoria'), (12, 13, 'obrigatoria'), (12, 2, 'desejavel');

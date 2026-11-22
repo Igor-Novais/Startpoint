@@ -179,3 +179,30 @@ GROUP BY u.id, u.nome_completo;
 
 -- 25) Atualizar data de verificação da vaga
 -- UPDATE vaga SET data_verificacao = CURDATE() WHERE id = 1;
+
+
+-- ÁREA DA EMPRESA E DO ADMINISTRADOR
+
+-- 26) Vagas aguardando a aprovação do administrador, da mais antiga para a mais nova
+SELECT v.id, v.titulo, v.empresa, v.area, v.data_verificacao AS enviada_em
+FROM vaga v
+WHERE v.status = 'pendente'
+ORDER BY v.data_verificacao;
+
+-- 27) Vagas de uma empresa com a situação e a quantidade de requisitos (tela Minhas vagas)
+SELECT v.id, v.titulo, v.status, COUNT(vc.competencia_id) AS requisitos
+FROM vaga v
+LEFT JOIN vaga_competencia vc ON vc.vaga_id = v.id
+WHERE v.usuario_id = 2
+GROUP BY v.id, v.titulo, v.status;
+
+-- 28) Quantidade de contas por perfil (resumo do administrador)
+SELECT perfil, COUNT(*) AS contas
+FROM usuario
+GROUP BY perfil;
+
+-- 29) Aprovar uma vaga enviada por empresa
+-- UPDATE vaga SET status = 'ativo', data_verificacao = CURDATE() WHERE id = 12;
+
+-- 30) Recusar uma vaga enviada por empresa
+-- UPDATE vaga SET status = 'recusada' WHERE id = 12;

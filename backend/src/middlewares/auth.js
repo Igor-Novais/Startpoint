@@ -13,6 +13,7 @@ function verificarToken(req, res, next) {
     try {
         const dados = jwt.verify(token, process.env.JWT_SEGREDO);
         req.usuarioId = dados.id;
+        req.perfil = dados.perfil || 'jovem';
         next();
     } catch (erro) {
         return res.status(401).json({ erro: 'Sessão expirada. Entre novamente.' });
