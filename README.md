@@ -4,6 +4,11 @@
 Aplicação web que monta uma trilha de cursos gratuitos até a primeira vaga de Jovem Aprendiz, focada em jovens de 16 a 24 anos de regiões periféricas.
 O jovem responde um diagnóstico rápido, recebe a sequência de cursos que cobre o que as vagas da área pedem, acompanha o progresso e vê o quanto o perfil dele combina com cada vaga (% de aderência e "O que falta").
 
+O sistema tem três tipos de conta:
+- **Jovem:** diagnóstico, trilha, cursos e vagas.
+- **Empresa:** cadastra e edita as próprias vagas de Jovem Aprendiz, com os requisitos obrigatórios e desejáveis. Toda vaga nova ou alterada fica "Aguardando aprovação".
+- **Administrador:** aprova ou recusa as vagas das empresas, desativa e reativa vagas e cursos, e cadastra ou edita cursos.
+
 Projeto Integrador da PUC-Campinas (Programação Web + Bancos de Dados Relacionais), Terceiro Setor, ODS 4, 8 e 10.
 
 ## Tecnologias Utilizadas
@@ -18,7 +23,7 @@ backend/
   src/
     config/        conexão com o MySQL
     controllers/   regras de cada rota (usuário, cursos, trilha, vagas)
-    middlewares/   verificação do token JWT
+    middlewares/   verificação do token JWT (auth.js) e do tipo de conta (perfil.js)
     models/        classes que fazem as consultas SQL
     routes/        endpoints da API
     server.js      sobe o servidor e entrega as telas
@@ -47,7 +52,15 @@ docker-compose.yml sobe o banco e a API no Docker
    ```
 4. Abrir no navegador: http://localhost:3000
 
-Usuário de teste: `ana@teste.com` / senha `123456` (ou crie uma conta nova).
+Contas de teste (ou crie uma conta nova de jovem ou de empresa):
+
+| Tipo | E-mail | Senha |
+|---|---|---|
+| Jovem | `ana@teste.com` | `123456` |
+| Empresa | `empresa@teste.com` | `123456` |
+| Administrador | `admin@startpoint.com` | `admin123` |
+
+A conta de administrador não pode ser criada pela tela, só pelo banco.
 
 Para rodar o teste da API, com o servidor ligado, abrir outro terminal na pasta `backend` e rodar `npm test`.
 
@@ -61,7 +74,7 @@ Não precisa instalar MySQL nem Node: só o Docker Desktop (no Windows ele pede 
    docker compose up --build
    ```
    Na primeira vez baixa o MySQL e o Node e leva alguns minutos. Ele sobe o banco (já com o `02_Startpoint_SQL.sql` e o `03_dados_exemplo.sql`) e a API.
-4. Abrir http://localhost:3000 (se não abrir, usar http://127.0.0.1:3000) e entrar com `ana@teste.com` / `123456`.
+4. Abrir http://localhost:3000 (se não abrir, usar http://127.0.0.1:3000) e entrar com uma das contas de teste acima.
 
 - Para rodar em segundo plano, sem deixar o terminal aberto: `docker compose up -d`.
 - Para desligar: `docker compose down`.
@@ -84,11 +97,24 @@ Não precisa instalar MySQL nem Node: só o Docker Desktop (no Windows ele pede 
 | GET | /api/cursos/areas | Áreas com curso |
 | GET | /api/vagas | Vagas com aderência e "O que falta" (filtros: area, cidade) |
 | GET | /api/vagas/cidades | Cidades com vaga |
+| GET | /api/vagas/opcoes | Áreas e competências para o formulário de vaga (empresa e admin) |
+| GET | /api/vagas/gestao | Vagas da empresa logada, ou todas para o admin |
+| GET | /api/vagas/:id | Vaga com os requisitos, para editar (empresa dona e admin) |
+| POST | /api/vagas | Cadastra vaga (empresa: fica pendente; admin: já publica) |
+| PUT | /api/vagas/:id | Altera vaga (empresa dona e admin) |
+| PATCH | /api/vagas/:id/status | Admin aprova, recusa, desativa ou reativa; empresa encerra a própria vaga |
+| GET | /api/usuarios/resumo | Números do painel do administrador |
+| GET | /api/cursos/todos | Todos os cursos, ativos e inativos (admin) |
+| GET | /api/cursos/opcoes | Instituições, áreas e competências para o formulário de curso (admin) |
+| GET | /api/cursos/:id | Curso com as competências, para editar (admin) |
+| POST | /api/cursos | Cadastra curso (admin) |
+| PUT | /api/cursos/:id | Altera curso (admin) |
+| PATCH | /api/cursos/:id/status | Ativa ou desativa curso (admin) |
 
-Com exceção do cadastro e do login, todas as rotas pedem o token no cabeçalho `Authorization: Bearer <token>`.
+Com exceção do cadastro e do login, todas as rotas pedem o token no cabeçalho `Authorization: Bearer <token>`. As rotas de empresa e de administrador também conferem o tipo de conta (respondem 403 para quem não tem permissão).
 
 ## Banco de dados
-10 tabelas relacionadas (48 atributos, 10 chaves estrangeiras), normalizadas até a 3FN, com índices na área do curso e na área e cidade da vaga.
+10 tabelas relacionadas (54 atributos, 11 chaves estrangeiras), normalizadas até a 3FN, com índices na área do curso e na área, cidade e situação da vaga. O tipo de conta fica na coluna `perfil` da tabela `usuario`, e a vaga guarda qual conta de empresa a cadastrou (`vaga.usuario_id`).
 Por enquanto o MVP atende a cidade de São Paulo.
 
 ## Protótipo
@@ -102,5 +128,7 @@ Figma Make: https://www.figma.com/make/q4EgNLn6MMgyzlzpJ5AGTR/Prototipo
 - Otavio Astolfo Torato – Back-end, Kanban e documentação
 
 ## Status do Projeto
-Em desenvolvimento – 3ª entrega (sistema integrado: front-end, API e banco).
-Próximos passos: PWA (manifest e service worker), recuperação de senha por e-mail e revisão dos cursos e vagas com o parceiro.
+Em desenvolvimento – versão final (sistema integrado: front-end, API e banco, com áreas da empresa e do administrador).
+Parcial: recuperação de senha (a tela existe, mas o envio do e-mail ainda não foi feito).
+Cursos, vagas e empresas ainda são dados de exemplo, até a revisão com o parceiro.
+Próximos passos: envio do e-mail de recuperação de senha e troca dos dados de exemplo pelos definitivos.
